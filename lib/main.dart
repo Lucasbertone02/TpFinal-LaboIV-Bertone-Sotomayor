@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         routes: {
           'home': (context) => HomeScreen(),
           'custom_list': (context) => const CustomListScreen(),
-          //'profile': (context) => const ProfileScreen(),
+          'profile': (context) => const ProfileScreen(),
           'custom_list_item': (context) => const CustomListItem(),
         }
         /* home: DesignScreen(), */

@@ -1,4 +1,4 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -77,4 +77,4 @@ class HeaderProfile extends StatelessWidget {
       ),
     );
   }
-}*/
+}

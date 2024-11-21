@@ -1,19 +1,22 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/screens/product_details.dart';
 import 'package:flutter_application_base/widgets/drawer_menu.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<Map<String, String>> camisetas = [
-    {'name': 'Argentina Negra', 'image': 'assets/images/argentina_negra.jpg', 'price': '50'},
-    {'name': 'Brasil Retro 2006', 'image': 'assets/images/brasil_06.jpg', 'price': '55'},
-    {'name': 'Inter Retro 2008', 'image': 'assets/images/inter_08.jpg', 'price': '60'},
+    {'name': 'Argentina Negra', 'image': 'assets/images/argentina_negra.jpg', 'price': '40'},
+    {'name': 'Brasil Retro 2006', 'image': 'assets/images/brasil_06.jpg', 'price': '50'},
+    {'name': 'Inter Retro 2008', 'image': 'assets/images/inter_08.jpg', 'price': '50'},
+    {'name': 'Barcelona 2024', 'image': 'assets/images/barcelona2024.jpg', 'price': '40'},
+    //{'name': 'Boca Juniors 2024', 'image': 'assets/images/boca2024.jpg', 'price': '40'},
   ];
 
   final List<Map<String, String>> shorts = [
-    {'name': 'Argentina 2024', 'image': 'assets/images/short_arg_blanco.jpg', 'price': '40'},
-    {'name': 'Argentina 1994', 'image': 'assets/images/short_arg94.jpg', 'price': '45'},
-    {'name': 'Juventus Short', 'image': 'assets/images/short_juventus.jpg', 'price': '50'},
+    {'name': 'Argentina 2024', 'image': 'assets/images/short_arg_blanco.jpg', 'price': '30'},
+    {'name': 'Argentina 1994', 'image': 'assets/images/short_arg94.jpg', 'price': '30'},
+    {'name': 'Juventus Short', 'image': 'assets/images/short_juventus.jpg', 'price': '30'},
+    {'name': 'Boca Juniors Short', 'image': 'assets/images/short_boca.jpg', 'price': '30'},
+    {'name': 'Inter Miami Short', 'image': 'assets/images/short_intermiami.jpg', 'price': '30'},
   ];
 
   @override
@@ -34,6 +37,7 @@ class HomeScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 14, 137, 97), // Color de fondo (#0e8961),
       ),
+      drawer: DrawerMenu(), // Aquí agregamos el DrawerMenu
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
                     blurRadius: 10,
-                    offset: Offset(0, 5),
+                    offset: const Offset(0, 5),
                   ),
                 ],
               ),
@@ -136,7 +140,7 @@ class HomeScreen extends StatelessWidget {
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
                     blurRadius: 10,
-                    offset: Offset(0, 5),
+                    offset: const Offset(0, 5),
                   ),
                 ],
               ),
@@ -177,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
                     blurRadius: 8,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -195,7 +199,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 50),
             Container(
               padding: const EdgeInsets.all(16.0),
-              color: Color.fromARGB(255, 14, 137, 97), // Mismo color que el AppBar
+              color: const Color.fromARGB(255, 14, 137, 97), // Mismo color que el AppBar
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -231,14 +235,14 @@ class ProductCard extends StatelessWidget {
   final String image;
   final String price;
 
-  ProductCard({required this.name, required this.image, required this.price});
+  const ProductCard({required this.name, required this.image, required this.price});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 195,
       margin: const EdgeInsets.symmetric(horizontal: 5.0),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
@@ -256,7 +260,7 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.all(7.0),
             child: Text(
               name,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ),
@@ -264,8 +268,9 @@ class ProductCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0), // Espacio superior para mover el precio hacia arriba
             child: Text(
-              '\$ $price',
-              style: TextStyle(fontSize: 16),
+              '\$$price',
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
           ),
         ],
