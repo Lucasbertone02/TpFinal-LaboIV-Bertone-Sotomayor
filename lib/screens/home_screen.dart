@@ -57,14 +57,16 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 36),
             // Slogan o texto introductorio
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 'En Bahía Camietas tenemos los mejores conjuntos de la ciudad. Encontra las camisetas y shorts que se ajustan a tu estilo y personalidad. ¡Tenemos todo lo que buscas!',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black87,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white  // Color para el tema oscuro
+                  : Theme.of(context).textTheme.bodyLarge?.color,  // Color para el tema claro
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -242,8 +244,11 @@ class ProductCard extends StatelessWidget {
     return Container(
       width: 195,
       margin: const EdgeInsets.symmetric(horizontal: 5.0),
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Colors.grey[800]  // Color de fondo para el tema oscuro
+            : Colors.white,     // Color de fondo para el tema claro
+        borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -260,7 +265,13 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.all(7.0),
             child: Text(
               name,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white  // Color para el tema oscuro
+                    : Colors.black, // Color para el tema claro
+              ),
               textAlign: TextAlign.center,
             ),
           ),
@@ -269,7 +280,13 @@ class ProductCard extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 8.0), // Espacio superior para mover el precio hacia arriba
             child: Text(
               '\$$price',
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white  // Color para el tema oscuro
+                    : Colors.black, // Color para el tema claro
+              ),
               textAlign: TextAlign.center,
             ),
           ),

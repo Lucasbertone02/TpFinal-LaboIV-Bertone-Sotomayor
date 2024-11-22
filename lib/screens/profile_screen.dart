@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  final VoidCallback onThemeChanged; // Callback para notificar cambios de tema
+
+  const ProfileScreen({
+    super.key,
+    required this.onThemeChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,46 +16,28 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('ProfileScreen'),
+        title: const Text('Profile Screen'),
         elevation: 10,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             HeaderProfile(size: size),
-            const Padding(
-              padding: EdgeInsets.all(15.0),
-              child: BodyProfile(),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SwitchListTile.adaptive(
+                title: const Text('Dark Mode'),
+                value: Preferences.darkmode,
+                onChanged: (bool value) {
+                  Preferences.darkmode = value;
+                  onThemeChanged(); // Notificar a la app que el tema cambió
+                },
+              ),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class BodyProfile extends StatelessWidget {
-  final bool darkMode = false;
-
-  const BodyProfile({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SwitchListTile.adaptive(
-          title: const Text('Dark Mode'),
-          value: Preferences.darkmode,
-          onChanged: (bool value) {
-            Preferences.darkmode = value;
-          },
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-      ],
     );
   }
 }
