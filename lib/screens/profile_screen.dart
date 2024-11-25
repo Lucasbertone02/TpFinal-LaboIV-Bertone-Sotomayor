@@ -15,9 +15,19 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        title: const Text.rich(
+          TextSpan(
+            text: 'Profile Screen',
+            style: TextStyle(
+              fontWeight: FontWeight.bold, // Texto en negrita
+              fontSize: 25,               // Tamaño de la fuente
+              color: Colors.white,        // Color del texto
+            ),
+          ),
+        ),
+        elevation: 20,
         centerTitle: true,
-        title: const Text('Profile Screen'),
-        elevation: 10,
+        backgroundColor: const Color.fromARGB(255, 14, 137, 97), // Color de fondo (#0e8961),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -54,12 +64,27 @@ class HeaderProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: size.height * 0.40,
-      color: const Color(0xff2d3e4f),
+      height: size.height * 0.30,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/cancha.jpg'), // Ruta de tu imagen
+          fit: BoxFit.cover, // Ajusta la imagen para cubrir todo el contenedor
+        ),
+      ),
       child: Center(
         child: CircleAvatar(
           radius: 100,
-          child: Image.asset('assets/images/avatar.png'),
+          backgroundColor: Colors.transparent, // Fondo transparente para el avatar
+          child: ClipOval(
+            child: SizedBox(
+              width: 170,
+              height: 170, 
+            child: Image.asset(
+              'assets/images/jugador.png', // Imagen del avatar
+              fit: BoxFit.cover,
+            ),
+          ),
+          ),
         ),
       ),
     );
