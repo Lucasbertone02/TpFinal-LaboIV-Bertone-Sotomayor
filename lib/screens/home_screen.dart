@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_base/screens/product_details.dart';
 import 'package:flutter_application_base/widgets/drawer_menu.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<Map<String, String>> camisetas = [
-    {'name': 'Argentina Negra', 'image': 'assets/images/argentina_negra.jpg', 'price': '40'},
-    {'name': 'Brasil Retro 2006', 'image': 'assets/images/brasil_06.jpg', 'price': '50'},
-    {'name': 'Inter Retro 2008', 'image': 'assets/images/inter_08.jpg', 'price': '50'},
-    {'name': 'Barcelona 2024', 'image': 'assets/images/barcelona2024.jpg', 'price': '40'},
-    //{'name': 'Boca Juniors 2024', 'image': 'assets/images/boca2024.jpg', 'price': '40'},
+  final List<Map<String, String>> climaSemanal = [
+    {'day': 'Lunes', 'image': 'assets/images/sol.png', 'weather': 'Soleado', 'temp': '22°C / 15°C'},
+    {'day': 'Martes', 'image': 'assets/images/nublado.png', 'weather': 'Nublado', 'temp': '20°C / 14°C'},
+    {'day': 'Miércoles', 'image': 'assets/images/lluvia.png', 'weather': 'Lluvioso', 'temp': '18°C / 13°C'},
+    {'day': 'Jueves', 'image': 'assets/images/tormenta.png', 'weather': 'Tormenta', 'temp': '17°C / 12°C'},
+    {'day': 'Viernes', 'image': 'assets/images/sol_nubes.png', 'weather': 'Soleado/Nublado', 'temp': '21°C / 14°C'},
+    {'day': 'Sábado', 'image': 'assets/images/sol.png', 'weather': 'Soleado', 'temp': '25°C / 16°C'},
+    {'day': 'Domingo', 'image': 'assets/images/nublado.png', 'weather': 'Nublado', 'temp': '19°C / 13°C'},
   ];
 
-  final List<Map<String, String>> shorts = [
-    {'name': 'Argentina 2024', 'image': 'assets/images/short_arg_blanco.jpg', 'price': '30'},
-    {'name': 'Argentina 1994', 'image': 'assets/images/short_arg94.jpg', 'price': '30'},
-    {'name': 'Juventus Short', 'image': 'assets/images/short_juventus.jpg', 'price': '30'},
-    {'name': 'Boca Juniors Short', 'image': 'assets/images/short_boca.jpg', 'price': '30'},
-    {'name': 'Inter Miami Short', 'image': 'assets/images/short_intermiami.jpg', 'price': '30'},
+  final List<Map<String, String>> contaminacionCiudades = [
+    {'ciudad': 'Buenos Aires','image':'assets/images/cont_moderado.png','nivel': 'Moderado', 'indice': '52'},
+    {'ciudad': 'Londres','image':'assets/images/cont_avanzada.png' ,'nivel':'Alto', 'indice': '89'},
+    {'ciudad': 'Lima','image':'assets/images/cont_baja.png','nivel':'Bajo', 'indice': '31'},
+    {'ciudad': 'Bogotá','image':'assets/images/cont_moderado.png', 'nivel':'Moderado', 'indice': '45'},
+    {'ciudad': 'Montevideo','image':'assets/images/cont_baja.png', 'nivel':'Bajo', 'indice': '28'},
   ];
 
   @override
@@ -25,155 +26,216 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text.rich(
           TextSpan(
-            text: 'Bahía Camisetas⚽',
+            text: 'App Clima',
             style: TextStyle(
-              fontWeight: FontWeight.bold, // Texto en negrita
-              fontSize: 25,               // Tamaño de la fuente
-              color: Colors.white,        // Color del texto
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.white,
             ),
           ),
         ),
         elevation: 20,
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 14, 137, 97), // Color de fondo (#0e8961),
+        backgroundColor: const Color.fromARGB(255, 95, 182, 233),
       ),
-      drawer: DrawerMenu(), // Aquí agregamos el DrawerMenu
+      drawer: DrawerMenu(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 50),
-            // Banner principal (solo la imagen, ocupa todo el ancho)
+            // Banner principal
             Container(
-              width: double.infinity,  // Asegura que ocupe todo el ancho de la pantalla
-              height: 250,             // Ajusta la altura del banner a lo que desees
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(0),
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/banner.jpg'), // Ruta de tu imagen
-                  fit: BoxFit.cover, // La imagen cubre todo el contenedor
+              width: double.infinity,
+              height: 250,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/banner.jpg'),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
             const SizedBox(height: 36),
-            // Slogan o texto introductorio
+            // Nuevo slogan
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                'En Bahía Camietas tenemos los mejores conjuntos de la ciudad. Encontra las camisetas y shorts que se ajustan a tu estilo y personalidad. ¡Tenemos todo lo que buscas!',
+                'Consulta el pronóstico del clima para planificar tu semana de la mejor manera. ¡No dejes que el clima te tome por sorpresa!',
                 style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white  // Color para el tema oscuro
-                  : Theme.of(context).textTheme.bodyLarge?.color,  // Color para el tema claro
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Theme.of(context).textTheme.bodyLarge?.color,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(height: 32),
-
-            // Carrusel de camisetas envuelto en un Container
+            // Carrusel del clima semanal
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                'Camisetas Destacadas..',
+                'El Clima en 7 Días',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 8),
             Container(
-              height: 340, // Altura del contenedor para el carrusel
-              padding: const EdgeInsets.symmetric(vertical: 8.0), // Espaciado alrededor
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12), // Bordes redondeados
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
-              ),
+              height: 250,
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: camisetas.length,
+                itemCount: climaSemanal.length,
                 itemBuilder: (context, index) {
-                  final camiseta = camisetas[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductDetailScreen(
-                            name: camiseta['name']!,
-                            image: camiseta['image']!,
-                            price: camiseta['price']!,
+                  final diaClima = climaSemanal[index];
+                  return Container(
+                    width: 160,
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey[800]
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(8.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          diaClima['day']!,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
-                      );
-                    },
-                    child: ProductCard(
-                      name: camiseta['name']!,
-                      image: camiseta['image']!,
-                      price: camiseta['price']!,
+                        const SizedBox(height: 8),
+                        Image.asset(
+                          diaClima['image']!,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          diaClima['weather']!,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          diaClima['temp']!,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black87,
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 },
               ),
             ),
-            const SizedBox(height: 16),
-
-            // Carrusel de shorts envuelto en un Container
+            const SizedBox(height: 32),
+            // Carrusel de contaminación
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                'Shorts Destacados..',
+                'Contaminación en Ciudades',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 8),
             Container(
-              height: 340, // Altura del contenedor para el carrusel de shorts
-              padding: const EdgeInsets.symmetric(vertical: 8.0), // Espaciado alrededor
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12), // Bordes redondeados
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
-              ),
+              height: 250,
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: shorts.length,
+                itemCount: contaminacionCiudades.length,
                 itemBuilder: (context, index) {
-                  final short = shorts[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductDetailScreen(
-                            name: short['name']!,
-                            image: short['image']!,
-                            price: short['price']!,
+                  final ciudad = contaminacionCiudades[index];
+                  return Container(
+                    width: 160,
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.grey[800]
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(8.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          ciudad['ciudad']!,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black,
                           ),
                         ),
-                      );
-                    },
-                    child: ProductCard(
-                      name: short['name']!,
-                      image: short['image']!,
-                      price: short['price']!,
+                        const SizedBox(height: 8),
+                        Image.asset(
+                          ciudad['image']!,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          ciudad['nivel']!,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                        'Índice: ${ciudad['indice']}',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black87,
+                        ),
+                      ),
+
+                      ],
                     ),
                   );
                 },
               ),
             ),
-            const SizedBox(height: 32), // Espacio entre carrusel y contenedor de contacto
+            const SizedBox(height: 32),
+            // Texto final
             Container(
               padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
               decoration: BoxDecoration(
@@ -188,7 +250,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               child: const Text(
-                '¡Por cualquier cosa no dudes en consultarnos! Te contestaremos lo antes posible por WhatsApp al número 2917874523',
+                '¡Por cualquier cosa no dudes en consultarnos! Te contestaremos lo antes posible por nuestro Mail, climas@gmail.com',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.black87,
@@ -197,100 +259,29 @@ class HomeScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            // Footer
             const SizedBox(height: 50),
+            // Footer
             Container(
               padding: const EdgeInsets.all(16.0),
-              color: const Color.fromARGB(255, 14, 137, 97), // Mismo color que el AppBar
+              color: const Color.fromARGB(255, 95, 182, 233),
+              width: double.infinity,
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'Nos podés encontrar en: Calle Brown 354, Bahía Blanca',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
                   SizedBox(height: 10),
                   Text(
                     '¡Gracias por usar nuestra aplicación!',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
+                      fontWeight: FontWeight.w500,
                     ),
-                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );  
-  }
-}
-
-class ProductCard extends StatelessWidget {
-  final String name;
-  final String image;
-  final String price;
-
-  const ProductCard({required this.name, required this.image, required this.price});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 195,
-      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-      decoration: BoxDecoration(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.grey[800]  // Color de fondo para el tema oscuro
-            : Colors.white,     // Color de fondo para el tema claro
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(7.0),
-            child: Text(
-              name,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white  // Color para el tema oscuro
-                    : Colors.black, // Color para el tema claro
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          // Ajuste de la posición del precio
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0), // Espacio superior para mover el precio hacia arriba
-            child: Text(
-              '\$$price',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white  // Color para el tema oscuro
-                    : Colors.black, // Color para el tema claro
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
       ),
     );
   }

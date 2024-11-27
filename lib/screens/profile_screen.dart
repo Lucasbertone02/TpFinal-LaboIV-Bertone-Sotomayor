@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         elevation: 20,
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 14, 137, 97), // Color de fondo (#0e8961),
+        backgroundColor: const Color.fromARGB(255, 95, 182, 233), // Color de fondo (#0e8961),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -67,7 +67,7 @@ class HeaderProfile extends StatelessWidget {
       height: size.height * 0.30,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/cancha.jpg'), // Ruta de tu imagen
+          image: AssetImage('assets/images/cielo.jpg'), // Ruta de tu imagen
           fit: BoxFit.cover, // Ajusta la imagen para cubrir todo el contenedor
         ),
       ),
@@ -80,7 +80,7 @@ class HeaderProfile extends StatelessWidget {
               width: 170,
               height: 170, 
             child: Image.asset(
-              'assets/images/jugador.png', // Imagen del avatar
+              'assets/avatars/avatar6.png', // Imagen del avatar
               fit: BoxFit.cover,
             ),
           ),
