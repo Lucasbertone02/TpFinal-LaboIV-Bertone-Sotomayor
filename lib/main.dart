@@ -26,9 +26,9 @@ class _MyAppState extends State<MyApp> {
       theme: Preferences.darkmode ? ThemeData.dark() : ThemeData.light(),
       routes: {
         'home': (context) => HomeScreen(),
-        'custom_list': (context) => const CustomListScreen(),
+        'custom_list_aire': (context) => ListaRegistrosAireScreen(),
         'profile': (context) => ProfileScreen(onThemeChanged: _updateTheme),
-        'custom_list_item': (context) => const CustomListItem(),
+        'custom_list_item_aire': (context) =>  VisualizacionRegistroAireScreen(ciudad: const {},),
       },
     );
   }
