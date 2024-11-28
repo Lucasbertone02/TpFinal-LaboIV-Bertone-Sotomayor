@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
-import 'package:flutter_application_base/screens/list_comentarios.dart';
 import 'package:flutter_application_base/screens/screens.dart';
-
 
 
 void main() async {
