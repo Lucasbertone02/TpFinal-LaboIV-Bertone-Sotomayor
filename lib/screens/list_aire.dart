@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_base/screens/list_aire_item.dart';
-import 'package:flutter_application_base/screens/list_comentarios.dart';
+import 'package:flutter_application_base/screens/screens.dart';
 import 'package:flutter_application_base/widgets/card.dart';
 import '../mocks/mocks.dart';
 

@@ -39,8 +39,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  /// Método para actualizar el tema
   void _updateTheme() {
-    setState(() {}); // Esto fuerza la reconstrucción para aplicar el tema actualizado
+    setState(() {}); 
   }
 }
