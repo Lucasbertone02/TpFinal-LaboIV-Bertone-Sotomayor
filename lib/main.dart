@@ -24,7 +24,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: 'home',
-      theme: Preferences.darkmode ? ThemeData.dark() : ThemeData.light(),
+       theme: Preferences.darkmode 
+      ? ThemeData.dark().copyWith(
+          textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'Rubik'),
+        )
+      : ThemeData.light().copyWith(
+          textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Rubik'),
+        ),
       routes: {
         'home': (context) => HomeScreen(),
         'custom_list_aire': (context) => ListaRegistrosAireScreen(),
