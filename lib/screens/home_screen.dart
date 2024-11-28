@@ -1,24 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/widgets/drawer_menu.dart';
+import 'package:flutter_application_base/mocks/mocks.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<Map<String, String>> climaSemanal = [
-    {'day': 'Lunes', 'image': 'assets/images/sol.png', 'weather': 'Soleado', 'temp': '22°C / 15°C'},
-    {'day': 'Martes', 'image': 'assets/images/nublado.png', 'weather': 'Nublado', 'temp': '20°C / 14°C'},
-    {'day': 'Miércoles', 'image': 'assets/images/lluvia.png', 'weather': 'Lluvioso', 'temp': '18°C / 13°C'},
-    {'day': 'Jueves', 'image': 'assets/images/tormenta.png', 'weather': 'Tormenta', 'temp': '17°C / 12°C'},
-    {'day': 'Viernes', 'image': 'assets/images/sol_nubes.png', 'weather': 'Soleado/Nublado', 'temp': '21°C / 14°C'},
-    {'day': 'Sábado', 'image': 'assets/images/sol.png', 'weather': 'Soleado', 'temp': '25°C / 16°C'},
-    {'day': 'Domingo', 'image': 'assets/images/nublado.png', 'weather': 'Nublado', 'temp': '19°C / 13°C'},
-  ];
-
-  final List<Map<String, String>> contaminacionCiudades = [
-    {'ciudad': 'Buenos Aires','image':'assets/images/cont_moderado.png','nivel': 'Moderado', 'indice': '52'},
-    {'ciudad': 'Londres','image':'assets/images/cont_avanzada.png' ,'nivel':'Alto', 'indice': '89'},
-    {'ciudad': 'Lima','image':'assets/images/cont_baja.png','nivel':'Bajo', 'indice': '31'},
-    {'ciudad': 'Bogotá','image':'assets/images/cont_moderado.png', 'nivel':'Moderado', 'indice': '45'},
-    {'ciudad': 'Montevideo','image':'assets/images/cont_baja.png', 'nivel':'Bajo', 'indice': '28'},
-  ];
 
   @override
   Widget build(BuildContext context) {
