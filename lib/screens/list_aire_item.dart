@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 class VisualizacionRegistroAireScreen extends StatefulWidget {
   final Map<String, String> ciudad;
+  final Function(String, bool) onComentarioGuardado;
 
-  VisualizacionRegistroAireScreen({required this.ciudad});
+  VisualizacionRegistroAireScreen({
+    required this.ciudad,
+    required this.onComentarioGuardado,
+  });
 
   @override
   _VisualizacionRegistroScreenState createState() =>
@@ -13,7 +17,6 @@ class VisualizacionRegistroAireScreen extends StatefulWidget {
 class _VisualizacionRegistroScreenState
     extends State<VisualizacionRegistroAireScreen> {
   bool _isContaminado = false;
-
   final _controller = TextEditingController();
 
   @override
@@ -41,14 +44,18 @@ class _VisualizacionRegistroScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Índice de contaminación: ${ciudad['indice']}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Ciudad: ${ciudad['nombre']}',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            // Switch para contaminación
+            const SizedBox(height: 20),
+            Text(
+              'Índice de contaminación: ${ciudad['indice']}',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
             Row(
               children: [
-                Text('¿Es peligroso?'),
+                const Text('¿Es peligroso?'),
                 Switch(
                   value: _isContaminado,
                   onChanged: (value) {
@@ -59,28 +66,35 @@ class _VisualizacionRegistroScreenState
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            // Campo de texto para comentarios
+            const SizedBox(height: 20),
             TextFormField(
               controller: _controller,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Comentario sobre la ciudad',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
-            // Imagen principal
-           Center(
+            const SizedBox(height: 10),
+            Center(
               child: Image.asset('assets/images/list_item.png', height: 200),
             ),
-           SizedBox(height: 20),
-            // Botón de acción
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Acción que se debe tomar con el comentario
-                // Aquí puedes guardar o mostrar el comentario
+                final comentario = _controller.text;
+                if (comentario.isNotEmpty) {
+                  // Llamar a la función de callback con el comentario y el estado de peligrosidad
+                  widget.onComentarioGuardado(comentario, _isContaminado);
+                  _controller.clear(); // Limpiar el campo
+                  setState(() {
+                    _isContaminado = false; // Limpiar el switch
+                  });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Comentario Guardado')),
+                  );
+                }
               },
-              child: Text('Guardar Comentario'),
+              child: const Text('Guardar Comentario'),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
+import 'package:flutter_application_base/screens/list_comentarios.dart';
 import 'package:flutter_application_base/screens/screens.dart';
 
 
@@ -28,7 +29,8 @@ class _MyAppState extends State<MyApp> {
         'home': (context) => HomeScreen(),
         'custom_list_aire': (context) => ListaRegistrosAireScreen(),
         'profile': (context) => ProfileScreen(onThemeChanged: _updateTheme),
-        'custom_list_item_aire': (context) =>  VisualizacionRegistroAireScreen(ciudad: const {},),
+        'custom_list_item_aire': (context) => VisualizacionRegistroAireScreen(ciudad: const {},  onComentarioGuardado: (comentario, esPeligrosa) {print('Comentario guardado desde la ruta inicial: $comentario, es peligrosa: $esPeligrosa');},),
+        'list_comentarios': (context) => ListaComentariosScreen(),      
       },
     );
   }
