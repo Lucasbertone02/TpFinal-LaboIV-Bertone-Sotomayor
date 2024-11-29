@@ -1,3 +1,5 @@
+//Mocks utilizados para simular datos de la aplicación
+
 final List<Map<String, String>> climaSemanal = [
   {'day': 'Lunes', 'image': 'assets/images/sol.png', 'weather': 'Soleado', 'temp': '22°C / 15°C'},
   {'day': 'Martes', 'image': 'assets/images/nublado.png', 'weather': 'Nublado', 'temp': '20°C / 14°C'},
@@ -22,8 +24,8 @@ final List<Map<String, String>> ciudades = [
     {'nombre': 'Ciudad de Mexico', 'imagen': 'assets/images/cont_moderado.png', 'indice': '80', 'nivel': 'Moderado'},
     {'nombre': 'Nueva York', 'imagen': 'assets/images/cont_avanzada.png', 'indice': '130', 'nivel': 'Alto'},
     {'nombre': 'Madrid', 'imagen': 'assets/images/cont_baja.png', 'indice': '30', 'nivel': 'Bajo'},
-    {'nombre': 'Paris', 'imagen': 'assets/images/cont_moderado.png', 'indice': '90', 'nivel': 'Alto'},
-    {'nombre': 'Londres', 'imagen': 'assets/images/cont_moderado.png', 'indice': '89', 'nivel': 'Alto'},
+    {'nombre': 'Paris', 'imagen': 'assets/images/cont_avanzada.png', 'indice': '90', 'nivel': 'Alto'},
+    {'nombre': 'Londres', 'imagen': 'assets/images/cont_avanzada.png', 'indice': '89', 'nivel': 'Alto'},
     {'nombre': 'Tokyo', 'imagen': 'assets/images/cont_avanzada.png', 'indice': '110', 'nivel': 'Alto'},
     {'nombre': 'Los Angeles', 'imagen': 'assets/images/cont_moderado.png', 'indice': '75', 'nivel': 'Moderado'},
     {'nombre': 'Berlin', 'imagen': 'assets/images/cont_baja.png', 'indice': '40', 'nivel': 'Bajo'},

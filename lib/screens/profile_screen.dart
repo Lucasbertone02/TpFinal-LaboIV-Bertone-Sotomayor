@@ -19,15 +19,15 @@ class ProfileScreen extends StatelessWidget {
           TextSpan(
             text: 'Profile Screen',
             style: TextStyle(
-              fontWeight: FontWeight.bold, // Texto en negrita
-              fontSize: 25,               // Tamaño de la fuente
-              color: Colors.white,        // Color del texto
+              fontWeight: FontWeight.bold, 
+              fontSize: 25,               
+              color: Colors.white,        
             ),
           ),
         ),
         elevation: 20,
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 95, 182, 233), // Color de fondo (#0e8961),
+        backgroundColor: const Color.fromARGB(255, 95, 182, 233), 
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -67,20 +67,20 @@ class HeaderProfile extends StatelessWidget {
       height: size.height * 0.30,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/cielo.jpg'), // Ruta de tu imagen
-          fit: BoxFit.cover, // Ajusta la imagen para cubrir todo el contenedor
+          image: AssetImage('assets/images/cielo.jpg'), 
+          fit: BoxFit.cover, 
         ),
       ),
       child: Center(
         child: CircleAvatar(
           radius: 100,
-          backgroundColor: Colors.transparent, // Fondo transparente para el avatar
+          backgroundColor: Colors.transparent, 
           child: ClipOval(
             child: SizedBox(
               width: 170,
               height: 170, 
             child: Image.asset(
-              'assets/avatars/avatar6.png', // Imagen del avatar
+              'assets/avatars/avatar6.png',
               fit: BoxFit.cover,
             ),
           ),

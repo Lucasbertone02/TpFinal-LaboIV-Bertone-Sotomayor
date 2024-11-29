@@ -57,8 +57,8 @@ class _DrawerHeaderWithImage extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/drawer_baner.jpg'), // Ruta de la imagen
-            fit: BoxFit.cover, // Ajusta la imagen para que cubra todo el espacio
+            image: AssetImage('assets/images/drawer_baner.jpg'), 
+            fit: BoxFit.cover, 
           ),
         ),
         alignment: Alignment.bottomRight,

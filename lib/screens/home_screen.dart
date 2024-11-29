@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 36),
-            // Nuevo slogan
+            // Slogan
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(

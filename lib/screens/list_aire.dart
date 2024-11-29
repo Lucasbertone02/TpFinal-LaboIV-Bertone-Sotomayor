@@ -3,6 +3,7 @@ import 'package:flutter_application_base/screens/screens.dart';
 import 'package:flutter_application_base/widgets/card.dart';
 import '../mocks/mocks.dart';
 
+//Pantalla que muestra una lista de registros de contaminación del aire
 class ListaRegistrosAireScreen extends StatelessWidget {
 
   @override
@@ -20,25 +21,24 @@ class ListaRegistrosAireScreen extends StatelessWidget {
           ),
         ),
         elevation: 20,
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 95, 182, 233),
+        centerTitle: true, 
+        backgroundColor: const Color.fromARGB(255, 95, 182, 233), 
       ),
       body: ListView.builder(
-        itemCount: ciudades.length,
+        itemCount: ciudades.length, 
         itemBuilder: (context, index) {
-          final ciudad = ciudades[index];
-          final bool isContaminado = int.parse(ciudad['indice']!) > 100;
-
+          final ciudad = ciudades[index]; // Obtiene los datos de la ciudad actual
           return GestureDetector(
             onTap: () {
+              // Navega a la pantalla de visualización de registro con los datos de la ciudad seleccionada
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => VisualizacionRegistroAireScreen(
-                    ciudad: ciudad, // Pasar los datos de la ciudad
+                    ciudad: ciudad, // Pasa los datos de la ciudad a la siguiente pantalla
                     onComentarioGuardado: (comentario, esPeligrosa) {
                       print('Comentario guardado: $comentario');
-                      // Agregar el comentario junto con la ciudad y la peligrosidad
+                      // Agrega el comentario junto con información sobre la peligrosidad a la lista global
                       ListaComentariosScreen.comentarios.add({
                         'ciudad': ciudad['nombre']!,
                         'comentario': comentario,
@@ -49,11 +49,12 @@ class ListaRegistrosAireScreen extends StatelessWidget {
                 ),
               );
             },
+            //LLama al widget RegistroContaminacionCard para mostrar la información de la ciudad
             child: RegistroContaminacionCard(
               ciudad: ciudad['nombre']!,
-              indiceContaminacion: ciudad['indice']!,
-              isContaminado: isContaminado,
-              imagenUrl: ciudad['imagen']!,
+              indiceContaminacion: ciudad['indice']!, 
+               nivelContaminacion: ciudad['nivel']!,
+              imagenUrl: ciudad['imagen']!, 
             ),
           );
         },

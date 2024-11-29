@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
 
-// Este es el widget reutilizable, que es una "Card" que representa un registro de contaminación
+//Widget reutilizable que representa un registro de contaminación
 class RegistroContaminacionCard extends StatelessWidget {
-  final String ciudad;
-  final String indiceContaminacion;
-  final bool isContaminado;
-  final String imagenUrl; // La imagen ahora siempre se espera que esté presente
+  final String ciudad; 
+  final String indiceContaminacion; 
+  final String nivelContaminacion; 
+  final String imagenUrl; 
+
 
   const RegistroContaminacionCard({
     Key? key,
     required this.ciudad,
     required this.indiceContaminacion,
-    required this.isContaminado,
-    required this.imagenUrl, // Ya no es nullable
+    required this.nivelContaminacion,
+    required this.imagenUrl,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Determinar el color basado en el nivel de contaminación.
+    Color colorTexto;
+    switch (nivelContaminacion.toLowerCase()) {
+      case 'alta':
+        colorTexto = Colors.red;
+        break;
+      case 'moderada':
+        colorTexto = Colors.orange;
+        break;
+      case 'baja':
+        colorTexto = Colors.green;
+        break;
+      default:
+        colorTexto = Colors.grey; // Por si se introduce un nivel no esperado.
+    }
+
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       shape: RoundedRectangleBorder(
@@ -28,12 +45,11 @@ class RegistroContaminacionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // La imagen siempre se mostrará, y ahora tiene tamaño definido
             Image.asset(
               imagenUrl,
-              height: 100, // Ajusta el tamaño de la imagen según tus necesidades
-              width: double.infinity, // Esto hace que la imagen ocupe todo el ancho disponible
-              fit: BoxFit.cover, // Esto asegura que la imagen se recorte correctamente si es necesario
+              height: 100,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
             const SizedBox(height: 10),
             Text(
@@ -54,7 +70,13 @@ class RegistroContaminacionCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(isContaminado ? 'Alta' : 'Baja'),
+                Text(
+                  nivelContaminacion,
+                  style: TextStyle(
+                    color: colorTexto,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ],
