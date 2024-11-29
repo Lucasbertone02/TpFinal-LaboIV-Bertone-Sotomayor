@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                'El Clima en 7 Días',
+                'El Clima Actual en las ciudades',
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
               ),
             ),
@@ -70,9 +70,9 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: climaSemanal.length,
+                itemCount: climaCiudades.length,
                 itemBuilder: (context, index) {
-                  final diaClima = climaSemanal[index];
+                  final diaClima = climaCiudades[index];
                   return Container(
                     width: 160,
                     margin: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -93,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          diaClima['day']!,
+                          diaClima['city']!,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

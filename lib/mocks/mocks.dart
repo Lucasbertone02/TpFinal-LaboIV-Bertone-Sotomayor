@@ -1,12 +1,11 @@
-final List<Map<String, String>> climaSemanal = [
-  {'day': 'Lunes', 'image': 'assets/images/sol.png', 'weather': 'Soleado', 'temp': '22°C / 15°C'},
-  {'day': 'Martes', 'image': 'assets/images/nublado.png', 'weather': 'Nublado', 'temp': '20°C / 14°C'},
-  {'day': 'Miércoles', 'image': 'assets/images/lluvia.png', 'weather': 'Lluvioso', 'temp': '18°C / 13°C'},
-  {'day': 'Jueves', 'image': 'assets/images/tormenta.png', 'weather': 'Tormenta', 'temp': '17°C / 12°C'},
-  {'day': 'Viernes', 'image': 'assets/images/sol_nubes.png', 'weather': 'Soleado/Nublado', 'temp': '21°C / 14°C'},
-  {'day': 'Sábado', 'image': 'assets/images/sol.png', 'weather': 'Soleado', 'temp': '25°C / 16°C'},
-  {'day': 'Domingo', 'image': 'assets/images/nublado.png', 'weather': 'Nublado', 'temp': '19°C / 13°C'},
+final List<Map<String, String>> climaCiudades = [
+  {'city': 'Buenos Aires', 'image': 'assets/images/sol.png', 'temp': '24°C', 'weather': 'Soleado'},
+  {'city': 'Lima', 'image': 'assets/images/nublado.png', 'temp': '19°C', 'weather': 'Nublado'},
+  {'city': 'Bogotá', 'image': 'assets/images/lluvia.png', 'temp': '15°C', 'weather': 'Lluvia'},
+  {'city': 'Montevideo', 'image': 'assets/images/sol_nubes.png', 'temp': '22°C', 'weather': 'Sol con nubes'},
+  {'city': 'Londres', 'image': 'assets/images/tormenta.png', 'temp': '10°C', 'weather': 'Tormenta'},
 ];
+
 
 final List<Map<String, String>> contaminacionCiudades = [
   {'ciudad': 'Buenos Aires', 'image': 'assets/images/cont_moderado.png', 'nivel': 'Moderado', 'indice': '52'},
