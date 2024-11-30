@@ -5,7 +5,6 @@ class DrawerMenu extends StatelessWidget {
   {'route': 'home', 'title': 'Home', 'subtitle': 'By Bertone-Sotomayor'},
   {'route': 'profile', 'title': 'Perfil usuario', 'subtitle': 'By Bertone-Sotomayor'},
   {'route': 'custom_list_aire', 'title': 'Lista Contaminacion Aire', 'subtitle': 'By Sotomayor'},
-  {'route': 'custom_list_item_aire', 'title': 'Detalle Contaminacion Aire', 'subtitle': 'By Sotomayor'},
   {'route': 'list_comentarios', 'title': 'Lista de Comentarios', 'subtitle': 'By Sotomayor'},
   {'route': 'clima_ciudades', 'title': 'Clima Ciudades', 'subtitle': 'By Bertone'},
   {'route': 'formulario_screen', 'title': 'Formulario Ciudades', 'subtitle': 'By Bertone'}, 
