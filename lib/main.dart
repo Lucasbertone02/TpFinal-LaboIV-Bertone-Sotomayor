@@ -1,15 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
+import 'package:flutter_application_base/providers/aireProvider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_application_base/screens/AgregarCiudadScreen.dart';
 import 'package:flutter_application_base/screens/climaCiudadesScreen.dart';
 import 'package:flutter_application_base/screens/screens.dart';
- // Importación de la nueva pantalla
+import 'package:provider/provider.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preferences.initShared();
-  runApp(const MyApp());
+  await dotenv.load();
+   runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AireProvider>(
+          create: (_) => AireProvider(),
+          lazy: false,
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
+
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
