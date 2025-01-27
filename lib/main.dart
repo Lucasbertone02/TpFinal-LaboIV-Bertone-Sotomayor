@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
 import 'package:flutter_application_base/providers/aireProvider.dart';
+import 'package:flutter_application_base/providers/climaciudadesProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_application_base/screens/AgregarCiudadScreen.dart';
 import 'package:flutter_application_base/screens/climaCiudadesScreen.dart';
@@ -12,18 +13,23 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preferences.initShared();
   await dotenv.load();
-   runApp(
+  runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AireProvider>(
           create: (_) => AireProvider(),
           lazy: false,
         ),
+        ChangeNotifierProvider<Climaciudadesprovider>(
+          create: (_) => Climaciudadesprovider(),
+          lazy: false, // Carga automática al iniciar la app
+        ),
       ],
       child: const MyApp(),
     ),
   );
 }
+
 
 
 class MyApp extends StatefulWidget {
