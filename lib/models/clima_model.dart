@@ -1,60 +1,53 @@
 class Clima {
-    String status;
-    Data data;
+    String msg;
+    List<Datum> data;
 
     Clima({
-        required this.status,
+        required this.msg,
         required this.data,
     });
 
     factory Clima.fromJson(Map<String, dynamic> json) => Clima(
-        status: json["status"],
-        data: Data.fromJson(json["data"]),
+        msg: json["msg"],
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
-        "status": status,
-        "data": data.toJson(),
+        "msg": msg,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
     };
 }
 
-class Data {
-    String descripcion;
+class Datum {
+    DateTime fecha;
     double temperatura;
-    double tempMinima;
-    double tempMaxima;
-    double sensacionTermica;
+    String descripcion;
+    String icono;
     int humedad;
     double viento;
 
-    Data({
-        required this.descripcion,
+    Datum({
+        required this.fecha,
         required this.temperatura,
-        required this.tempMinima,
-        required this.tempMaxima,
-        required this.sensacionTermica,
+        required this.descripcion,
+        required this.icono,
         required this.humedad,
         required this.viento,
     });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
-        descripcion: json["descripcion"],
+    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        fecha: DateTime.parse(json["fecha"]),
         temperatura: json["temperatura"]?.toDouble(),
-        tempMinima: json["temp_minima"]?.toDouble(),
-        tempMaxima: json["temp_maxima"]?.toDouble(),
-        sensacionTermica: json["sensacion_termica"]?.toDouble(),
+        descripcion: json["descripcion"],
+        icono: json["icono"],
         humedad: json["humedad"],
         viento: json["viento"]?.toDouble(),
     );
 
-
     Map<String, dynamic> toJson() => {
-        "descripcion": descripcion,
+        "fecha": "${fecha.year.toString().padLeft(4, '0')}-${fecha.month.toString().padLeft(2, '0')}-${fecha.day.toString().padLeft(2, '0')}",
         "temperatura": temperatura,
-        "temp_minima": tempMinima,
-        "temp_maxima": tempMaxima,
-        "sensacion_termica": sensacionTermica,
-        "humedad": humedad,
-        "viento": viento,
+        "descripcion": descripcion,
+        "icono": icono,
     };
 }

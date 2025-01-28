@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 class ClimaDetalleCard extends StatelessWidget {
   final String title;
   final String description;
-  final String imagePath;
   final String temperature;
   final bool isDarkMode;
+  final IconData icon; // Recibimos el icono como IconData
 
   ClimaDetalleCard({
     required this.title,
     required this.description,
-    required this.imagePath,
     required this.temperature,
     required this.isDarkMode,
+    required this.icon, // Recibimos el icono como IconData
   });
 
   @override
@@ -36,11 +36,10 @@ class ClimaDetalleCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        Image.asset(
-          imagePath,
-          height: 200,
-          width: 200,
-          fit: BoxFit.cover,
+        Icon(
+          icon, // Usamos el ícono que recibimos
+          size: 100,
+          color: isDarkMode ? Colors.white : Colors.black,
         ),
         const SizedBox(height: 20),
         Container(

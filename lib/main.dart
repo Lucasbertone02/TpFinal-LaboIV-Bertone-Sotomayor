@@ -16,10 +16,11 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<AireProvider>(
-          create: (_) => AireProvider(),
-          lazy: false,
-        ),
+        // Comenta o elimina temporalmente el AireProvider
+        // ChangeNotifierProvider<AireProvider>(
+        //   create: (_) => AireProvider(),
+        //   lazy: false,
+        // ),
         ChangeNotifierProvider<Climaciudadesprovider>(
           create: (_) => Climaciudadesprovider(),
           lazy: false, // Carga automática al iniciar la app
