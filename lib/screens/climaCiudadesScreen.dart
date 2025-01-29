@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_base/mocks/weather_icons.dart';
+import 'package:weather_icons/weather_icons.dart';
 import 'package:flutter_application_base/providers/climaciudadesProvider.dart';
 import 'package:flutter_application_base/screens/climaDetalleScreen.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_icons/weather_icons.dart';
 
 class ClimaCiudadesScreen extends StatelessWidget {
   final List<String> ciudades = ['Bahia Blanca', 'Buenos Aires', 'Montevideo', 'Lima', 'Bogota'];
@@ -42,7 +43,7 @@ class ClimaCiudadesScreen extends StatelessWidget {
                   ...ciudades.asMap().entries.map((entry) {
                     final int idx = entry.key;
                     final String ciudad = entry.value;
-                    
+
                     if (idx >= climaProvider.climas!.length) {
                       return Container();
                     }
@@ -144,99 +145,77 @@ class ClimaCiudadesScreen extends StatelessWidget {
   }
 
   Widget _buildWeatherCard({
-  required BuildContext context,
-  required dynamic datum,
-  required bool isDarkMode,
-}) {
-  return GestureDetector(
-    onTap: () => Navigator.push(
-      context,
-      MaterialPageRoute(
-      builder: (context) => ClimaDetalleScreen(
-      clima: datum.descripcion,
-      descripcion: datum.descripcion,
-      temp: datum.temperatura.toString(),
-      viento: datum.viento.toString(), // Asegúrate de que 'viento' sea un valor correcto
-      humedad: datum.humedad.toString(), // Asegúrate de que 'humedad' sea un valor correcto
-      icono: _getWeatherIcon(datum.descripcion), 
-    ),
-      ),
-    ),
-    child: Container(
-      width: 160,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: isDarkMode ? Color.fromARGB(255, 50, 50, 80) : Colors.white,
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [
-          BoxShadow(
-            color: isDarkMode ? Colors.black26 : Colors.grey.withOpacity(0.2),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
+    required BuildContext context,
+    required dynamic datum,
+    required bool isDarkMode,
+  }) {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ClimaDetalleScreen(
+            datoClima: datum, // Pasas el objeto completo Datum
           ),
-        ],
+        ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            _formatDate(datum.fecha),
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+      child: Container(
+        width: 160,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: isDarkMode ? Color.fromARGB(255, 50, 50, 80) : Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: [
+            BoxShadow(
+              color: isDarkMode ? Colors.black26 : Colors.grey.withOpacity(0.2),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              _formatDate(datum.fecha),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Icon(
+              getWeatherIcon(datum.icono), 
+              size: 50,
               color: isDarkMode ? Colors.white : Colors.black,
             ),
-          ),
-          const SizedBox(height: 8),
-          Icon(
-            _getWeatherIcon(datum.descripcion),
-            size: 50,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            datum.descripcion,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: isDarkMode ? Colors.white70 : Colors.black,
+            const SizedBox(height: 8),
+            Text(
+              datum.descripcion,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: isDarkMode ? Colors.white70 : Colors.black,
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            '${datum.temperatura}°C',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w400,
-              color: isDarkMode ? Colors.white70 : Colors.black87,
+            const SizedBox(height: 8),
+            Text(
+              '${datum.temperatura}°C',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: isDarkMode ? Colors.white70 : Colors.black87,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            // Barra de separación y temperaturas máxima y mínima
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   String _formatDate(DateTime fecha) {
     return '${fecha.day}/${fecha.month}';
-  }
-
-  IconData _getWeatherIcon(String descripcion) {
-    switch (descripcion.toLowerCase()) {
-      case 'cielo claro':
-        return WeatherIcons.day_sunny;
-      case 'nubes dispersas':
-        return WeatherIcons.day_cloudy;
-      case 'muy nuboso':
-        return WeatherIcons.cloudy;
-      case 'nubes':
-        return WeatherIcons.cloudy;
-      case 'lluvioso':
-        return WeatherIcons.rain;
-      case 'tormenta':
-        return WeatherIcons.storm_showers;
-      default:
-        return WeatherIcons.na;
-    }
   }
 }

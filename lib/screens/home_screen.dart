@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_base/widgets/drawer_menu.dart';
 import 'package:flutter_application_base/mocks/mocks.dart';
+import 'package:flutter_application_base/mocks/weather_icons.dart';
+import 'package:flutter_application_base/providers/climaActualProvider.dart';
+import 'package:flutter_application_base/screens/climactualdetallesScreen.dart';
+import 'package:flutter_application_base/widgets/drawer_menu.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
+    final climaProvider = Provider.of<ClimaActualProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text.rich(
@@ -68,73 +73,99 @@ class HomeScreen extends StatelessWidget {
             Container(
               height: 250,
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: climaCiudades.length,
-                itemBuilder: (context, index) {
-                  final diaClima = climaCiudades[index];
-                  return Container(
-                    width: 160,
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey[800]
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
+              child: climaProvider.climas.isEmpty
+                  ? const Center(child: CircularProgressIndicator()) // Cargando datos
+                  : ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: climaProvider.climas.length,
+                      itemBuilder: (context, index) {
+                        final ciudad = climaProvider.climas.keys.elementAt(index);
+                        final clima = climaProvider.climas[ciudad]!;
+                        return GestureDetector(
+                          onTap: () {
+                            // Navegar a la pantalla de detalles
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ClimaDetailsScreen(
+                                  nombreCiudad: ciudad,
+                                  descripcion: clima.data.descripcion,
+                                  temperatura: clima.data.temperatura,
+                                  tempMinima: clima.data.tempMinima,
+                                  tempMaxima: clima.data.tempMaxima,
+                                  sensacionTermica: clima.data.sensacionTermica,
+                                  humedad: clima.data.humedad,
+                                  viento: clima.data.viento,
+                                  icono: clima.data.icono,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 160,
+                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.grey[800]
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(8.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 5),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  ciudad,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Icon(
+                                  getWeatherIcon(clima.data.icono), // Usamos el icono correcto
+                                  size: 60,
+                                  color: Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black,
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  clima.data.descripcion,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  '${clima.data.temperatura}°C',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black87,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          diaClima['city']!,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Image.asset(
-                          diaClima['image']!,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          diaClima['weather']!,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          diaClima['temp']!,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black87,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
             ),
             const SizedBox(height: 32),
             // Carrusel de contaminación
@@ -202,16 +233,15 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                        'Índice: ${ciudad['indice']}',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
+                          'Índice: ${ciudad['indice']}',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Colors.black87,
+                          ),
                         ),
-                      ),
-
                       ],
                     ),
                   );

@@ -27,8 +27,7 @@ class Climaciudadesprovider extends ChangeNotifier {
       // Iteramos sobre el array de ciudades
       for (String ciudad in ciudadesProvider) {
         final url = Uri.http(
-          baseUrl,
-          '/api/v1/pronostico/extendidoPorCiudad/$ciudad', // La ciudad va en la URL
+          baseUrl, '/api/v1/pronostico/extendidoPorCiudad/$ciudad', 
         );
 
         final response = await http.get(url);

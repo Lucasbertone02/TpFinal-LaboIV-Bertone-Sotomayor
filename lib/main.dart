@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
 import 'package:flutter_application_base/providers/aireProvider.dart';
+import 'package:flutter_application_base/providers/climaActualProvider.dart';
 import 'package:flutter_application_base/providers/climaciudadesProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_application_base/screens/AgregarCiudadScreen.dart';
@@ -23,15 +24,17 @@ void main() async {
         // ),
         ChangeNotifierProvider<Climaciudadesprovider>(
           create: (_) => Climaciudadesprovider(),
-          lazy: false, // Carga automática al iniciar la app
+          lazy: false, 
+        ),
+        ChangeNotifierProvider<ClimaActualProvider>(
+          create: (_) => ClimaActualProvider(),
+          lazy: false, 
         ),
       ],
       child: const MyApp(),
     ),
   );
 }
-
-
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -71,6 +74,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _updateTheme() {
-    setState(() {}); // Actualiza la interfaz al cambiar el tema.
+    setState(() {}); 
   }
+
 }

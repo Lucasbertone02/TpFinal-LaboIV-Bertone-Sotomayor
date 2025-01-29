@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_base/widgets/ClimaDetalleCard.dart';
-import 'package:weather_icons/weather_icons.dart'; // Importamos para iconos del clima
+import 'package:flutter_application_base/mocks/weather_icons.dart';
+import 'package:flutter_application_base/models/clima_model.dart';
+import 'package:intl/intl.dart';
+import 'package:weather_icons/weather_icons.dart';
+import 'package:flutter_application_base/widgets/ClimaDetalleCard.dart'; // Importamos la clase con la lógica de los iconos
+// Importamos el modelo Clima y Datum
 
 class ClimaDetalleScreen extends StatelessWidget {
-  final String clima; 
-  final String descripcion;
-  final String temp;
-  final String viento;
-  final String humedad;
-  final IconData icono; // Recibimos el ícono del clima
+  final Datum datoClima; // Recibimos un objeto Datum con todos los datos del clima
 
   ClimaDetalleScreen({
-    required this.clima,
-    required this.descripcion,
-    required this.temp,
-    required this.viento,
-    required this.humedad,
-    required this.icono, // Recibimos el ícono del clima
+    required this.datoClima, // Recibimos el objeto completo de datos
   });
 
   @override
@@ -27,7 +21,7 @@ class ClimaDetalleScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
-        title: const Text('Detalles del Clima'),
+        title: Text('Detalles del Clima en ${datoClima.nombreCiudad}'), // Mostrar el nombre de la ciudad
         centerTitle: true,
         backgroundColor: isDarkMode ? const Color.fromARGB(255, 29, 24, 99) : Colors.blueAccent,
         elevation: 10,
@@ -39,15 +33,16 @@ class ClimaDetalleScreen extends StatelessWidget {
             children: [
               // Titulo y el ícono del clima
               ClimaDetalleCard(
-                title: clima,
-                description: descripcion,
-                temperature: temp,
-                isDarkMode: isDarkMode,
-                icon: icono,
-              ),
+                    title: datoClima.descripcion,
+                    description: 'Día: ${DateFormat('dd/MM/yyyy').format(datoClima.fecha)}', // Formateamos la fecha aquí
+                    temperature: '${datoClima.temperatura}°C',
+                    isDarkMode: isDarkMode,
+                    icon: getWeatherIcon(datoClima.icono),
+                  ),
               
-              // Datos de viento y humedad
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
+
+              // Datos adicionales de viento, humedad, etc.
               _buildAdditionalInfo(isDarkMode),
             ],
           ),
@@ -56,14 +51,16 @@ class ClimaDetalleScreen extends StatelessWidget {
     );
   }
 
-  // Función para construir la sección de viento y humedad
+  // Función para construir la sección de viento, humedad, etc.
   Widget _buildAdditionalInfo(bool isDarkMode) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildInfoRow('Viento', viento, isDarkMode),
-        const SizedBox(height: 10),
-        _buildInfoRow('Humedad', humedad, isDarkMode),
+        _buildInfoRow('Viento', '${datoClima.viento} km/h', isDarkMode),
+        const SizedBox(height: 20),
+        _buildInfoRow('Humedad', '${datoClima.humedad}%', isDarkMode),
+        const SizedBox(height: 20),
+        _buildInfoRow('Sensación Térmica', '${datoClima.sensacionTermica}°C', isDarkMode),
       ],
     );
   }
@@ -71,14 +68,15 @@ class ClimaDetalleScreen extends StatelessWidget {
   // Widget para mostrar la fila de información de viento y humedad
   Widget _buildInfoRow(String label, String value, bool isDarkMode) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.all(18),
+      margin: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
         color: isDarkMode ? Colors.grey[850] : Colors.blueGrey[50],
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
             color: Colors.black26,
-            blurRadius: 10,
+            blurRadius: 15,
             offset: Offset(0, 5),
           ),
         ],
@@ -89,40 +87,20 @@ class ClimaDetalleScreen extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: isDarkMode ? Colors.white : Colors.black,
+              color: isDarkMode ? Colors.white : Colors.black87,
             ),
           ),
           Text(
             value,
             style: TextStyle(
-              fontSize: 18,
-              color: isDarkMode ? Colors.white70 : Colors.black87,
+              fontSize: 20,
+              color: isDarkMode ? Colors.white70 : Colors.black54,
             ),
           ),
         ],
       ),
     );
-  }
-
-  // Función para obtener el ícono correspondiente a la descripción del clima
-  IconData _getWeatherIcon(String descripcion) {
-    switch (descripcion.toLowerCase()) {
-      case 'cielo claro':
-        return WeatherIcons.day_sunny;
-      case 'nubes dispersas':
-        return WeatherIcons.day_cloudy;
-      case 'muy nuboso':
-        return WeatherIcons.cloudy;
-      case 'nubes':
-        return WeatherIcons.cloudy;
-      case 'lluvioso':
-        return WeatherIcons.rain;
-      case 'tormenta':
-        return WeatherIcons.storm_showers;
-      default:
-        return WeatherIcons.na; // Si no se encuentra una descripción, mostramos un ícono genérico
-    }
   }
 }
