@@ -5,3 +5,4 @@ export 'package:flutter_application_base/screens/home_screen.dart';
 export 'package:flutter_application_base/screens/list_comentarios.dart';
 export 'package:flutter_application_base/screens/AgregarCiudadScreen.dart';
 export 'package:flutter_application_base/screens/climaCiudadesScreen.dart';
+export 'package:flutter_application_base/screens/buscarClimaScreen.dart';

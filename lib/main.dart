@@ -26,10 +26,7 @@ void main() async {
           create: (_) => Climaciudadesprovider(),
           lazy: false, 
         ),
-        ChangeNotifierProvider<ClimaActualProvider>(
-          create: (_) => ClimaActualProvider(),
-          lazy: false, 
-        ),
+        // Ya no necesitamos el ClimaActualProvider aquí porque ahora usa Future
       ],
       child: const MyApp(),
     ),
@@ -68,7 +65,8 @@ class _MyAppState extends State<MyApp> {
               ),
               'clima_ciudades': (context) => ClimaCiudadesScreen(),
               'list_comentarios': (context) => ListaComentariosScreen(),
-              'formulario_screen': (context) => AgregarCiudadScreen(), // Nueva ruta
+              'formulario_screen': (context) => AgregarCiudadScreen(),
+              'buscar_clima': (context) => BuscarClimaScreen(),
       },
     );
   }

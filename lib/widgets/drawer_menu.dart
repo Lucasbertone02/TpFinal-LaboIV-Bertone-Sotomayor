@@ -8,6 +8,7 @@ class DrawerMenu extends StatelessWidget {
   {'route': 'list_comentarios', 'title': 'Lista de Comentarios', 'subtitle': 'By Sotomayor'},
   {'route': 'clima_ciudades', 'title': 'Clima Ciudades', 'subtitle': 'By Bertone'},
   {'route': 'formulario_screen', 'title': 'Formulario Ciudades', 'subtitle': 'By Bertone'}, 
+  {'route': 'buscar_clima', 'title': 'Buscar Clima', 'subtitle': 'By Bertone-Sotomayor'},
 ];
 
   DrawerMenu({super.key});
