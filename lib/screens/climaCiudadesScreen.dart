@@ -3,6 +3,7 @@ import 'package:flutter_application_base/mocks/mocks.dart';
 import 'package:flutter_application_base/screens/climaDetalleScreen.dart';
 
 class ClimaCiudadesScreen extends StatelessWidget {
+  const ClimaCiudadesScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;

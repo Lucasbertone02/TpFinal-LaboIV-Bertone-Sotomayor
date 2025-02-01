@@ -1,40 +1,41 @@
-import 'dart:convert' as convert;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_application_base/models/aire_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_base/models/list_aire_model.dart';
 class AireProvider extends ChangeNotifier {
-  List<ListElement> listAire = [];
+  List<Aire> listAire = [];
 
-  AireProvider() {
-    print('AireProvider inicializado');
-    getAire();
-  }
+  Future<Map<String, int>> cargarDatosCiudades(List<Map<String, dynamic>> ciudades) async {
+    Map<String, int> datosCiudades = {};
 
-  getAire() async {
-    try {
-      print('realizando petición a la API');
-      final url = Uri.https(
-        'localhost:3000',
-        '/api/v1/aire/polucion',
-        {'lat': '{lat}', 'lon': '{lon}'},
-      );
+    for (var ciudad in ciudades) {
+      final lat = ciudad['lat'];
+      final lon = ciudad['lon'];
 
-      final response = await http.get(url);
+      try {
+        // Se usa latitud y longitud para hacer la consulta
+        final url = Uri.http(
+          '10.0.2.2:3000', 
+          '/api/v1/aire/polucion',
+          {
+            'lat': lat.toString(),
+            'lon': lon.toString(),
+          },
+        );
 
-      if (response.statusCode == 200) {
-        // Decodifica la respuesta
-        final Aire aire = aireFromJson(response.body);
-
-        // Asigna la lista de ListElement
-        listAire = aire.data.list;
+        final response = await http.get(url);
+        if (response.statusCode == 200) {
+          final Aire aire = aireFromJson(response.body);
+          datosCiudades[ciudad['nombre']] = aire.aqi; // se guarda el AQI con el nombre de la ciudad
         } else {
-        print('Error en la petición: ${response.statusCode}');
+          datosCiudades[ciudad['nombre']] = 0; 
+        }
+      } catch (e) {
+        print('Error al obtener datos para las coordenadas lat: $lat, lon: $lon: $e');
+        datosCiudades[ciudad['nombre']] = 0; 
       }
-    } catch (e) {
-      print('Error en la petición: $e');
     }
-    notifyListeners();
+
+    return datosCiudades;
   }
-  
 }

@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_base/screens/list_comentarios.dart';
+
 
 //Pantalla para visualizar y registrar detalles sobre la contaminación del aire en una ciudad
 class VisualizacionRegistroAireScreen extends StatefulWidget {
-  final Map<String, String> ciudad; //Información de la ciudad (nombre e índice)
-  final Function(String, bool) onComentarioGuardado; //Callback para guardar un comentario
+  final Map<String, String> ciudad; 
+  final Function(String, bool) onComentarioGuardado; 
+  final int indiceContaminacion; 
+  final String nivelContaminacion; 
+  final String imagenUrl; 
 
   VisualizacionRegistroAireScreen({
     required this.ciudad,
     required this.onComentarioGuardado,
+    required this.indiceContaminacion,
+    required this.nivelContaminacion,
+    required this.imagenUrl,
   });
 
   @override
@@ -23,6 +31,10 @@ class _VisualizacionRegistroScreenState
   @override
   Widget build(BuildContext context) {
     final ciudad = widget.ciudad; // Referencia a los datos de la ciudad
+    final indiceContaminacion = widget.indiceContaminacion;
+    final nivelContaminacion = widget.nivelContaminacion;
+    final imagenUrl = widget.imagenUrl;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text.rich(
@@ -50,7 +62,12 @@ class _VisualizacionRegistroScreenState
             ),
             const SizedBox(height: 20),
             Text(
-              'Índice de contaminación: ${ciudad['indice']}',
+              'Índice de contaminación: $indiceContaminacion',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Nivel de contaminación: $nivelContaminacion',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
@@ -77,7 +94,7 @@ class _VisualizacionRegistroScreenState
             ),
             const SizedBox(height: 10),
             Center(
-              child: Image.asset('assets/images/list_item.png', height: 200),
+              child: Image.asset(imagenUrl, height: 200), 
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -96,6 +113,18 @@ class _VisualizacionRegistroScreenState
                 }
               },
               child: const Text('Guardar Comentario'),
+            ),
+            // Botón para navegar a la pantalla de comentarios
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ListaComentariosScreen(),
+                  ),
+                );
+              },
+              child: const Text('Ver Lista de Comentarios'),
             ),
           ],
         ),

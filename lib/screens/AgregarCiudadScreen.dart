@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AgregarCiudadScreen extends StatefulWidget {
+  const AgregarCiudadScreen({Key? key}) : super(key: key);
   @override
   _AgregarCiudadScreenState createState() => _AgregarCiudadScreenState();
 }

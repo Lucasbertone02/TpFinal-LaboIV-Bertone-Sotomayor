@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
 
 //Pantalla que muestra una lista de comentarios registrados sobre ciudades
-class ListaComentariosScreen extends StatelessWidget {
-  //Lista estática para almacenar los comentarios registrados
-  static final List<Map<String, String>> comentarios = [];
+class ListaComentariosScreen extends StatefulWidget {
+  const ListaComentariosScreen({super.key});
+
+  @override
+  _ListaComentariosScreenState createState() => _ListaComentariosScreenState();
+}
+
+class _ListaComentariosScreenState extends State<ListaComentariosScreen> {
+  //Lista dinámica para almacenar los comentarios registrados
+  List<Map<String, String>> comentarios = [];
+
+  // Método para agregar comentario
+  void agregarComentario(String ciudad, String comentario, bool esPeligrosa) {
+    setState(() {
+      comentarios.add({
+        'ciudad': ciudad,
+        'comentario': comentario,
+        'esPeligrosa': esPeligrosa.toString(),
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

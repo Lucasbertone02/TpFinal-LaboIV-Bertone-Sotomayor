@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_base/widgets/ClimaDetalleCard.dart';
 
 class ClimaDetalleScreen extends StatelessWidget {
+
   final String clima; 
   final String descripcion;
   final String imagen;
@@ -13,7 +14,7 @@ class ClimaDetalleScreen extends StatelessWidget {
     required this.imagen,
     required this.temp,
   });
-
+  
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;

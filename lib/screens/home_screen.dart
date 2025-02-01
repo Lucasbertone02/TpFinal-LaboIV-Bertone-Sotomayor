@@ -3,7 +3,7 @@ import 'package:flutter_application_base/widgets/drawer_menu.dart';
 import 'package:flutter_application_base/mocks/mocks.dart';
 
 class HomeScreen extends StatelessWidget {
-
+  const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

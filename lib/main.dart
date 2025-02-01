@@ -47,19 +47,38 @@ class _MyAppState extends State<MyApp> {
               textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Rubik'),
             ),
      routes: {
-                'home': (context) => HomeScreen(),
-                'custom_list_aire': (context) => ListaRegistrosAireScreen(),
-                'profile': (context) => ProfileScreen(onThemeChanged: _updateTheme),
-                'custom_list_item_aire': (context) => VisualizacionRegistroAireScreen(
-                      ciudad: const {},
-                      onComentarioGuardado: (comentario, esPeligrosa) {
-                print('Comentario guardado desde la ruta inicial: $comentario, es peligrosa: $esPeligrosa');
-              },
-              ),
-              'clima_ciudades': (context) => ClimaCiudadesScreen(),
-              'list_comentarios': (context) => ListaComentariosScreen(),
-              'formulario_screen': (context) => AgregarCiudadScreen(), // Nueva ruta
-      },
+  'home': (context) => const HomeScreen(),
+  'custom_list_aire': (BuildContext context) {
+    void handleComentarioGuardado(String comentario, bool esPeligrosa) {
+      print('Comentario guardado: $comentario, Es peligrosa: $esPeligrosa');
+    }
+
+    return ListaRegistrosAireScreen(
+      ciudad: {'nombre': 'Nueva York'},
+      indiceContaminacion: 75,
+      nivelContaminacion: 'Moderada',
+      imagenUrl: 'assets/images/medium_aqi.png',
+      onComentarioGuardado: handleComentarioGuardado,
+    );
+  },
+  'profile': (context) => ProfileScreen(onThemeChanged: _updateTheme),
+  'custom_list_item_aire': (BuildContext context) {
+    void handleComentarioGuardado(String comentario, bool esPeligrosa) {
+      print('Comentario guardado: $comentario, Es peligrosa: $esPeligrosa');
+    }
+
+    return VisualizacionRegistroAireScreen(
+      ciudad: {'nombre': 'Nueva York'},
+      indiceContaminacion: 75,
+      nivelContaminacion: 'Moderada',
+      imagenUrl: 'assets/images/medium_aqi.png',
+      onComentarioGuardado: handleComentarioGuardado,
+    );
+  },
+  'clima_ciudades': (context) =>  const ClimaCiudadesScreen(),
+  'list_comentarios': (context) =>  const ListaComentariosScreen(),
+  'formulario_screen': (context) =>  const AgregarCiudadScreen(),
+},
     );
   }
 
