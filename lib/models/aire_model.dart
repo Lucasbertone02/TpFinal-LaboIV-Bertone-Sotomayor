@@ -6,7 +6,7 @@ class Aire {
     required this.aqi,
     required this.components,
   });
-
+  //modelo de aire con los datos que queremos que nos devuelva la api
   factory Aire.fromJson(Map<String, dynamic> json) {
     var list = json["data"]["list"] as List;
     var registroAire = list.isNotEmpty ? list[0] : null;

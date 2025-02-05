@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 //Pantalla para visualizar y registrar detalles sobre la contaminación del aire en una ciudad
 class VisualizacionRegistroAireScreen extends StatefulWidget {
   final Map<String, String> ciudad; 
@@ -24,12 +23,12 @@ class VisualizacionRegistroAireScreen extends StatefulWidget {
 
 class _VisualizacionRegistroScreenState
     extends State<VisualizacionRegistroAireScreen> {
-  bool _isContaminado = false; // Estado para indicar si la contaminación es peligrosa
-  final _controller = TextEditingController(); // Controlador para manejar el texto del campo de comentarios
+  bool _isContaminado = false; //estado para indicar si la contaminación es peligrosa
+  final _controller = TextEditingController(); //controlador para manejar el texto del campo de comentarios
 
   @override
   Widget build(BuildContext context) {
-    final ciudad = widget.ciudad; // Referencia a los datos de la ciudad
+    final ciudad = widget.ciudad; // referencia a los datos de la ciudad
     final indiceContaminacion = widget.indiceContaminacion;
     final nivelContaminacion = widget.nivelContaminacion;
     final imagenUrl = widget.imagenUrl;
@@ -77,7 +76,7 @@ class _VisualizacionRegistroScreenState
                   value: _isContaminado,
                   onChanged: (value) {
                     setState(() {
-                      _isContaminado = value; // Actualiza el estado del switch
+                      _isContaminado = value; // actualiza el estado del switch
                     });
                   },
                 ),
@@ -100,11 +99,11 @@ class _VisualizacionRegistroScreenState
               onPressed: () {
                 final comentario = _controller.text; // Obtiene el texto del campo
                 if (comentario.isNotEmpty) {
-                  // Llama al callback para guardar el comentario y el estado del switch
+                  // llama al callback para guardar el comentario y el estado del switch
                   widget.onComentarioGuardado(comentario, _isContaminado);
                   _controller.clear(); // Limpia el campo de texto
                   setState(() {
-                    _isContaminado = false; // Resetea el switch
+                    _isContaminado = false; // resetea el switch
                   });
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Comentario Guardado')),

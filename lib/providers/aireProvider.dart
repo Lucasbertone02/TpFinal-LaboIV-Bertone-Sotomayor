@@ -26,7 +26,7 @@ class AireProvider extends ChangeNotifier {
         final response = await http.get(url);
         if (response.statusCode == 200) {
           final Aire aire = aireFromJson(response.body);
-          datosCiudades[ciudad['nombre']] = aire.aqi; // se guarda el AQI con el nombre de la ciudad
+          datosCiudades[ciudad['nombre']] = aire.aqi; // se guarda el aqi con el nombre de la ciudad
         } else {
           datosCiudades[ciudad['nombre']] = 0; 
         }

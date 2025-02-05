@@ -46,9 +46,12 @@ class _MyAppState extends State<MyApp> {
           : ThemeData.light().copyWith(
               textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Rubik'),
             ),
-     routes: {
+
+  routes: {
   'home': (context) => const HomeScreen(),
-  'custom_list_aire': (BuildContext context) {
+  'custom_list_aire': (BuildContext context) 
+  // funcion para guardar datos
+  {
     void handleComentarioGuardado(String comentario, bool esPeligrosa) {
       print('Comentario guardado: $comentario, Es peligrosa: $esPeligrosa');
     }
@@ -62,11 +65,12 @@ class _MyAppState extends State<MyApp> {
     );
   },
   'profile': (context) => ProfileScreen(onThemeChanged: _updateTheme),
-  'custom_list_item_aire': (BuildContext context) {
+  'custom_list_item_aire': (BuildContext context) 
+  // funcion para guardar datos
+  {
     void handleComentarioGuardado(String comentario, bool esPeligrosa) {
       print('Comentario guardado: $comentario, Es peligrosa: $esPeligrosa');
     }
-
     return VisualizacionRegistroAireScreen(
       ciudad: {'nombre': 'Nueva York'},
       indiceContaminacion: 75,

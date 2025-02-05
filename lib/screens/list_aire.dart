@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 class ListaRegistrosAireScreen extends StatelessWidget {
 
+ //atributos para recibir datos sobre el aire
  final Map<String, String> ciudad;
   final int indiceContaminacion;
   final String nivelContaminacion;
@@ -64,7 +65,7 @@ class ListaRegistrosAireScreen extends StatelessWidget {
   {'nombre': 'Beijing', 'lat': 39.9042, 'lon': 116.4074}
 ];
 
-
+// metodo para obtener el nivel de contaminación según el índice aqi
   String obtenerNivelContaminacion(int aqi) {
     switch (aqi) {
       case 1:
@@ -81,7 +82,7 @@ class ListaRegistrosAireScreen extends StatelessWidget {
         return 'Desconocido';
     }
   }
-
+// metodo para obtener la imagen correspondiente al aqi
   String obtenerImagenAqi(int aqi) {
     switch (aqi) {
       case 1:
@@ -100,7 +101,9 @@ class ListaRegistrosAireScreen extends StatelessWidget {
   }
 
   @override
+
   Widget build(BuildContext context) {
+    // obtiene el provider que maneja los datos de contaminación del aire
     final aireProvider = Provider.of<AireProvider>(context);
 
     return Scaffold(
@@ -119,6 +122,7 @@ class ListaRegistrosAireScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 95, 182, 233),
       ),
+      // carga los datos de contaminación de las ciudades
       body: FutureBuilder<Map<String, int>>(
         future: aireProvider.cargarDatosCiudades(ciudades),
         builder: (context, snapshot) {
@@ -144,9 +148,9 @@ class ListaRegistrosAireScreen extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => VisualizacionRegistroAireScreen(
                           ciudad: {'nombre': ciudad}, // Mostrar el nombre de la ciudad
-                          indiceContaminacion: aqi, // AQI de la ciudad
-                          nivelContaminacion: obtenerNivelContaminacion(aqi), // Nivel basado en AQI
-                          imagenUrl: obtenerImagenAqi(aqi), // Imagen según el AQI
+                          indiceContaminacion: aqi, // aqi de la ciudad
+                          nivelContaminacion: obtenerNivelContaminacion(aqi), // Nivel basado con el aqi
+                          imagenUrl: obtenerImagenAqi(aqi), // Imagen según el aqi
                           onComentarioGuardado: (comentario, esPeligrosa) {
                           print('Comentario guardado: $comentario');
                           },

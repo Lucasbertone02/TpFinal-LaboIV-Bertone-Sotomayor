@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final aireProvider = Provider.of<AireProvider>(context);
 
-    // Lista de ciudades con sus latitudes y longitudes
+    // Lista de ciudades con sus latitudes y longitudes para realizar la solicitud
     final ciudades = [
       {'nombre': 'Buenos Aires', 'lat': -34.6037, 'lon': -58.3816},
       {'nombre': 'New York', 'lat': 40.7128, 'lon': -74.0060},
@@ -182,7 +182,7 @@ class HomeScreen extends StatelessWidget {
                       final ciudad = datosCiudades.keys.elementAt(index);
                       final aqi = datosCiudades[ciudad] ?? 0;
 
-                     // Determinar imagen según el AQI usando switch
+                     // determinar imagen según el aqi
                       String imageAsset;
                       switch (aqi) {
                         case 1:
