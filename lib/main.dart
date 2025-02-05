@@ -76,7 +76,6 @@ class _MyAppState extends State<MyApp> {
     );
   },
   'clima_ciudades': (context) =>  const ClimaCiudadesScreen(),
-  'list_comentarios': (context) =>  const ListaComentariosScreen(),
   'formulario_screen': (context) =>  const AgregarCiudadScreen(),
 },
     );

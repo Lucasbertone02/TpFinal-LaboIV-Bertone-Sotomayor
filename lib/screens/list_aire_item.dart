@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_base/screens/list_comentarios.dart';
 
 
 //Pantalla para visualizar y registrar detalles sobre la contaminación del aire en una ciudad
@@ -113,18 +112,6 @@ class _VisualizacionRegistroScreenState
                 }
               },
               child: const Text('Guardar Comentario'),
-            ),
-            // Botón para navegar a la pantalla de comentarios
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ListaComentariosScreen(),
-                  ),
-                );
-              },
-              child: const Text('Ver Lista de Comentarios'),
             ),
           ],
         ),

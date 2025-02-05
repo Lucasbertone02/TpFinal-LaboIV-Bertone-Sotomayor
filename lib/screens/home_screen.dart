@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_base/providers/aireProvider.dart';
 import 'package:flutter_application_base/widgets/drawer_menu.dart';
 import 'package:flutter_application_base/mocks/mocks.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final aireProvider = Provider.of<AireProvider>(context);
+
+    // Lista de ciudades con sus latitudes y longitudes
+    final ciudades = [
+      {'nombre': 'Buenos Aires', 'lat': -34.6037, 'lon': -58.3816},
+      {'nombre': 'New York', 'lat': 40.7128, 'lon': -74.0060},
+      {'nombre': 'London', 'lat': 51.5074, 'lon': -0.1278},
+      {'nombre': 'Barcelona', 'lat': 41.3784, 'lon': 2.1915},
+      {'nombre': 'Tokyo', 'lat': 35.6895, 'lon': 139.6917},
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text.rich(
@@ -137,7 +150,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
-            // Carrusel de contaminación
+            // Carrusel de contaminación (con FutureBuilder)
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -146,77 +159,105 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            Container(
-              height: 250,
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: contaminacionCiudades.length,
-                itemBuilder: (context, index) {
-                  final ciudad = contaminacionCiudades[index];
-                  return Container(
-                    width: 160,
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey[800]
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          ciudad['ciudad']!,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Image.asset(
-                          ciudad['image']!,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          ciudad['nivel']!,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                        'Índice: ${ciudad['indice']}',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black87,
-                        ),
-                      ),
+            FutureBuilder<Map<String, int>>(
+              future: aireProvider.cargarDatosCiudades(ciudades),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-                      ],
-                    ),
-                  );
-                },
-              ),
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error al cargar los datos.'));
+                }
+
+                final datosCiudades = snapshot.data ?? {};
+
+                return Container(
+                  height: 250,
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: datosCiudades.length,
+                    itemBuilder: (context, index) {
+                      final ciudad = datosCiudades.keys.elementAt(index);
+                      final aqi = datosCiudades[ciudad] ?? 0;
+
+                     // Determinar imagen según el AQI usando switch
+                      String imageAsset;
+                      switch (aqi) {
+                        case 1:
+                          imageAsset = 'assets/images/cont_baja.png';
+                          break;
+                        case 2:
+                          imageAsset = 'assets/images/cont_justa.png';
+                          break;
+                        case 3:
+                          imageAsset = 'assets/images/cont_moderado.png';
+                          break;
+                        case 4:
+                          imageAsset = 'assets/images/cont_alta.png';
+                          break;
+                        case 5:
+                          imageAsset = 'assets/images/cont_avanzada.png';
+                          break;
+                        default:
+                          imageAsset = 'assets/images/no_encontrado.png';
+                      }
+
+                      return Container(
+                        width: 160,
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey[800]
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              blurRadius: 10,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              ciudad,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Image.asset(
+                              imageAsset,
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Índice de contaminacion: $aqi',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 32),
             // Texto final
