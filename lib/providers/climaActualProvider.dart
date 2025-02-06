@@ -5,7 +5,7 @@ import 'package:flutter_application_base/mocks/mocks.dart';
 import 'package:http/http.dart' as http;
 
 class ClimaActualProvider {
-  // Método original para las ciudades predefinidas
+  // Método original para las ciudades predefinidas 
   Future<Map<String, climaActual>> fetchClimaActual() async {
     Map<String, climaActual> climas = {};
 
@@ -34,7 +34,7 @@ class ClimaActualProvider {
     return climas;
   }
 
-  // Nuevo método para buscar una ciudad específica
+  // Nuevo método para buscar una ciudad específica por nombre
   Future<climaActual> fetchClimaPorCiudad(String ciudad) async {
     try {
       print('Realizando petición a la API para obtener el clima de $ciudad');
