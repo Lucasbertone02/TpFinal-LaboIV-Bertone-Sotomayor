@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
 import 'package:flutter_application_base/providers/aireProvider.dart';
-import 'package:flutter_application_base/providers/climaActualProvider.dart';
 import 'package:flutter_application_base/providers/climaciudadesProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_application_base/screens/AgregarCiudadScreen.dart';
-import 'package:flutter_application_base/screens/climaCiudadesScreen.dart';
 import 'package:flutter_application_base/screens/screens.dart';
 import 'package:provider/provider.dart';
 

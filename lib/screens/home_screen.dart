@@ -5,7 +5,6 @@ import 'package:flutter_application_base/providers/climaActualProvider.dart';
 import 'package:flutter_application_base/screens/climactualdetallesScreen.dart';
 import 'package:flutter_application_base/providers/aireProvider.dart';
 import 'package:flutter_application_base/widgets/drawer_menu.dart';
-import 'package:flutter_application_base/mocks/mocks.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
