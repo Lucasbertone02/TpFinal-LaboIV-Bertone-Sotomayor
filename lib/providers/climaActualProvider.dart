@@ -11,7 +11,7 @@ class ClimaActualProvider {
 
     try {
       print('Realizando peticiones a la API para obtener el clima actual');
-      final baseUrl = dotenv.env['API_URL_CHROME'];
+      final baseUrl = dotenv.env['API_URL_ANDROID'];
       if (baseUrl == null) {
         throw Exception("La variable URL no está definida en el archivo .env");
       }
@@ -38,7 +38,7 @@ class ClimaActualProvider {
   Future<climaActual> fetchClimaPorCiudad(String ciudad) async {
     try {
       print('Realizando petición a la API para obtener el clima de $ciudad');
-      final baseUrl = dotenv.env['URL'];
+      final baseUrl = dotenv.env['API_URL_ANDROID'];
       if (baseUrl == null) {
         throw Exception("La variable URL no está definida en el archivo .env");
       }
