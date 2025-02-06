@@ -19,7 +19,7 @@ class Climaciudadesprovider extends ChangeNotifier {
       // Almacenamos los climas obtenidos
       List<Clima> climasList = [];
 
-      final baseUrl = dotenv.env['URL']; // Esto devuelve "10.0.2.2:3000"
+      final baseUrl = dotenv.env['API_URL_CHROME']; // Esto devuelve "10.0.2.2:3000"
       if (baseUrl == null) {
         throw Exception("La variable URL no está definida en el archivo .env");
       }

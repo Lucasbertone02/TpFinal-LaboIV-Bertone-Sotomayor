@@ -3,8 +3,10 @@ import 'package:flutter_application_base/mocks/weather_icons.dart';
 import 'package:flutter_application_base/models/climaActual_model.dart';
 import 'package:flutter_application_base/providers/climaActualProvider.dart';
 import 'package:flutter_application_base/screens/climactualdetallesScreen.dart';
+import 'package:flutter_application_base/providers/aireProvider.dart';
 import 'package:flutter_application_base/widgets/drawer_menu.dart';
 import 'package:flutter_application_base/mocks/mocks.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -20,9 +22,19 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _climaFuture = _climaProvider.fetchClimaActual();
   }
-
   @override
   Widget build(BuildContext context) {
+    final aireProvider = Provider.of<AireProvider>(context);
+
+    // Lista de ciudades con sus latitudes y longitudes para realizar la solicitud
+    final ciudades = [
+      {'nombre': 'Buenos Aires', 'lat': -34.6037, 'lon': -58.3816},
+      {'nombre': 'New York', 'lat': 40.7128, 'lon': -74.0060},
+      {'nombre': 'London', 'lat': 51.5074, 'lon': -0.1278},
+      {'nombre': 'Barcelona', 'lat': 41.3784, 'lon': 2.1915},
+      {'nombre': 'Tokyo', 'lat': 35.6895, 'lon': 139.6917},
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text.rich(
@@ -89,202 +101,233 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-              SizedBox(
-                height: 250,
-                child: FutureBuilder<Map<String, climaActual>>(
-                  future: _climaFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${snapshot.error}'),
-                      );
-                    }
+SizedBox(
+  height: 250,
+  child: FutureBuilder<Map<String, climaActual>>(
+    future: _climaFuture,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      
+      if (snapshot.hasError) {
+        return Center(
+          child: Text('Error: ${snapshot.error}'),
+        );
+      }
 
-                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return const Center(
-                        child: Text('No hay datos disponibles'),
-                      );
-                    }
+      if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        return const Center(
+          child: Text('No hay datos disponibles'),
+        );
+      }
 
-                    final climas = snapshot.data!;
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: climas.length,
-                      itemBuilder: (context, index) {
-                        final ciudad = climas.keys.elementAt(index);
-                        final clima = climas[ciudad]!;
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ClimaDetailsScreen(
-                                  nombreCiudad: ciudad,
-                                  descripcion: clima.data.descripcion,
-                                  temperatura: clima.data.temperatura,
-                                  tempMinima: clima.data.tempMinima,
-                                  tempMaxima: clima.data.tempMaxima,
-                                  sensacionTermica: clima.data.sensacionTermica,
-                                  humedad: clima.data.humedad,
-                                  viento: clima.data.viento,
-                                  icono: clima.data.icono,
-                                ),
+      final climas = snapshot.data!;
+      return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: climas.length,
+        itemBuilder: (context, index) {
+          final ciudad = climas.keys.elementAt(index);
+          final clima = climas[ciudad]!;
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ClimaDetailsScreen(
+                    nombreCiudad: ciudad,
+                    descripcion: clima.data.descripcion,
+                    temperatura: clima.data.temperatura,
+                    tempMinima: clima.data.tempMinima,
+                    tempMaxima: clima.data.tempMaxima,
+                    sensacionTermica: clima.data.sensacionTermica,
+                    humedad: clima.data.humedad,
+                    viento: clima.data.viento,
+                    icono: clima.data.icono,
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              width: 160,
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.grey[800]
+                    : Colors.white,
+                borderRadius: BorderRadius.circular(8.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    ciudad,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 8), // Correcto
+                  Icon(
+                    getWeatherIcon(clima.data.icono),
+                    size: 60,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
+                  ),
+                  const SizedBox(height: 8), // Correcto
+                  Text(
+                    clima.data.descripcion,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 8), // Correcto
+                  Text(
+                    '${clima.data.temperatura}°C',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black87,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    },
+  ),
+),
+            const SizedBox(height: 32),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                'Contaminación en Ciudades',
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 8),
+            FutureBuilder<Map<String, int>>(
+              future: aireProvider.cargarDatosCiudades(ciudades),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error al cargar los datos.'));
+                }
+
+                final datosCiudades = snapshot.data ?? {};
+
+                return Container(
+                  height: 250,
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: datosCiudades.length,
+                    itemBuilder: (context, index) {
+                      final ciudad = datosCiudades.keys.elementAt(index);
+                      final aqi = datosCiudades[ciudad] ?? 0;
+
+                     // determinar imagen según el aqi
+                      String imageAsset;
+                      switch (aqi) {
+                        case 1:
+                          imageAsset = 'assets/images/cont_baja.png';
+                          break;
+                        case 2:
+                          imageAsset = 'assets/images/cont_justa.png';
+                          break;
+                        case 3:
+                          imageAsset = 'assets/images/cont_moderado.png';
+                          break;
+                        case 4:
+                          imageAsset = 'assets/images/cont_alta.png';
+                          break;
+                        case 5:
+                          imageAsset = 'assets/images/cont_avanzada.png';
+                          break;
+                        default:
+                          imageAsset = 'assets/images/no_encontrado.png';
+                      }
+
+                      return Container(
+                        width: 160,
+                        margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.grey[800]
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              blurRadius: 10,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              ciudad,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
                               ),
-                            );
-                          },
-                          child: Container(
-                            width: 160,
-                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.grey[800]
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(8.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 5),
-                                ),
-                              ],
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  ciudad,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).brightness == Brightness.dark
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Icon(
-                                  getWeatherIcon(clima.data.icono),
-                                  size: 60,
-                                  color: Theme.of(context).brightness == Brightness.dark
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  clima.data.descripcion,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Theme.of(context).brightness == Brightness.dark
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  '${clima.data.temperatura}°C',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: Theme.of(context).brightness == Brightness.dark
-                                        ? Colors.white
-                                        : Colors.black87,
-                                  ),
-                                ),
-                              ],
+                            const SizedBox(height: 8),
+                            Image.asset(
+                              imageAsset,
+                              height: 100,
+                              fit: BoxFit.cover,
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 32),
-              // Carrusel de contaminación
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  'Contaminación en Ciudades',
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Container(
-                height: 250,
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: contaminacionCiudades.length,
-                  itemBuilder: (context, index) {
-                    final ciudad = contaminacionCiudades[index];
-                    return Container(
-                      width: 160,
-                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.grey[800]
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
-                            blurRadius: 10,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            ciudad['ciudad']!,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.white
-                                  : Colors.black,
+                            const SizedBox(height: 8),
+                            Text(
+                              'Índice de contaminacion: $aqi',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          Image.asset(
-                            ciudad['image']!,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            ciudad['nivel']!,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Índice: ${ciudad['indice']}',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                              color: Theme.of(context).brightness == Brightness.dark
-                                  ? Colors.white
-                                  : Colors.black87,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 32),
+            // Texto final
+            
               const SizedBox(height: 32),
               // Texto final
               Container(
@@ -332,10 +375,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+              ],
+              ),
+            ),
+            ),
+          );
   }
 }

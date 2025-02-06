@@ -17,11 +17,10 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        // Comenta o elimina temporalmente el AireProvider
-        // ChangeNotifierProvider<AireProvider>(
-        //   create: (_) => AireProvider(),
-        //   lazy: false,
-        // ),
+         ChangeNotifierProvider<AireProvider>(
+           create: (_) => AireProvider(),
+           lazy: false,
+         ),
         ChangeNotifierProvider<Climaciudadesprovider>(
           create: (_) => Climaciudadesprovider(),
           lazy: false, 
@@ -53,21 +52,41 @@ class _MyAppState extends State<MyApp> {
           : ThemeData.light().copyWith(
               textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Rubik'),
             ),
-     routes: {
-                'home': (context) => HomeScreen(),
-                'custom_list_aire': (context) => ListaRegistrosAireScreen(),
-                'profile': (context) => ProfileScreen(onThemeChanged: _updateTheme),
-                'custom_list_item_aire': (context) => VisualizacionRegistroAireScreen(
-                      ciudad: const {},
-                      onComentarioGuardado: (comentario, esPeligrosa) {
-                print('Comentario guardado desde la ruta inicial: $comentario, es peligrosa: $esPeligrosa');
-              },
-              ),
-              'clima_ciudades': (context) => ClimaCiudadesScreen(),
-              'list_comentarios': (context) => ListaComentariosScreen(),
-              'formulario_screen': (context) => AgregarCiudadScreen(),
-              'buscar_clima': (context) => BuscarClimaScreen(),
-      },
+routes: {
+  'home': (context) => HomeScreen(),
+  'custom_list_aire': (BuildContext context) {
+    // Función para guardar datos
+    void handleComentarioGuardado(String comentario, bool esPeligrosa) {
+      print('Comentario guardado: $comentario, Es peligrosa: $esPeligrosa');
+    }
+
+    return ListaRegistrosAireScreen(
+      ciudad: const {'nombre': 'Nueva York'},
+      indiceContaminacion: 75,
+      nivelContaminacion: 'Moderada',
+      imagenUrl: 'assets/images/medium_aqi.png',
+      onComentarioGuardado: handleComentarioGuardado,
+    );
+  },
+  'profile': (context) => ProfileScreen(onThemeChanged: _updateTheme),
+  'custom_list_item_aire': (BuildContext context) {
+    // Función para guardar datos
+    void handleComentarioGuardado(String comentario, bool esPeligrosa) {
+      print('Comentario guardado: $comentario, Es peligrosa: $esPeligrosa');
+    }
+
+    return VisualizacionRegistroAireScreen(
+      ciudad: const {'nombre': 'Nueva York'},
+      indiceContaminacion: 75,
+      nivelContaminacion: 'Moderada',
+      imagenUrl: 'assets/images/medium_aqi.png',
+      onComentarioGuardado: handleComentarioGuardado,
+    );
+  },
+  'clima_ciudades': (context) => ClimaCiudadesScreen(),
+  'formulario_screen': (context) => const AgregarCiudadScreen(),
+  'buscar_clima': (context) => const BuscarClimaScreen(),
+},
     );
   }
 

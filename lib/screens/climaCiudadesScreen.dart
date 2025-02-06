@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/mocks/weather_icons.dart';
-import 'package:weather_icons/weather_icons.dart';
 import 'package:flutter_application_base/providers/climaciudadesProvider.dart';
 import 'package:flutter_application_base/screens/climaDetalleScreen.dart';
 import 'package:provider/provider.dart';

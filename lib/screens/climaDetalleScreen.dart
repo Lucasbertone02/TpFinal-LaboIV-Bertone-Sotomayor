@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_base/mocks/weather_icons.dart';
 import 'package:flutter_application_base/models/clima_model.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_icons/weather_icons.dart';
 import 'package:flutter_application_base/widgets/ClimaDetalleCard.dart'; // Importamos la clase con la lógica de los iconos
 // Importamos el modelo Clima y Datum
 
