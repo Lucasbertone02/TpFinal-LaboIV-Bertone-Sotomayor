@@ -47,15 +47,15 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
       backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
         title: Text(
-          "Agregar Ciudad",
+          'Agregar Ciudad',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 24,
+            fontSize: 25,
             color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
-        backgroundColor: isDarkMode ? Colors.deepPurple : Colors.blueAccent,
         centerTitle: true,
+        backgroundColor: isDarkMode ? Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -138,7 +138,7 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
                       "¿Es una ciudad importante?",
                       style: TextStyle(
                         fontSize: 16,
-                        color: isDarkMode ? Colors.white : Colors.black,
+                        color: isDarkMode ? Colors.white : Colors.black87,
                       ),
                     ),
                     Switch(

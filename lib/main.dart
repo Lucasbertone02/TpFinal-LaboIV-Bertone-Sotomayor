@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
 import 'package:flutter_application_base/providers/aireProvider.dart';
+import 'package:flutter_application_base/providers/climaciudadesProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_application_base/screens/AgregarCiudadScreen.dart';
-import 'package:flutter_application_base/screens/climaCiudadesScreen.dart';
 import 'package:flutter_application_base/screens/screens.dart';
 import 'package:provider/provider.dart';
 
@@ -12,19 +11,23 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preferences.initShared();
   await dotenv.load();
-   runApp(
+  runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<AireProvider>(
-          create: (_) => AireProvider(),
-          lazy: false,
+         ChangeNotifierProvider<AireProvider>(
+           create: (_) => AireProvider(),
+           lazy: false,
+         ),
+        ChangeNotifierProvider<Climaciudadesprovider>(
+          create: (_) => Climaciudadesprovider(),
+          lazy: false, 
         ),
+        // Ya no necesitamos el ClimaActualProvider aquí porque ahora usa Future
       ],
       child: const MyApp(),
     ),
   );
 }
-
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -46,18 +49,16 @@ class _MyAppState extends State<MyApp> {
           : ThemeData.light().copyWith(
               textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Rubik'),
             ),
-
-  routes: {
-  'home': (context) => const HomeScreen(),
-  'custom_list_aire': (BuildContext context) 
-  // funcion para guardar datos
-  {
+routes: {
+  'home': (context) => HomeScreen(),
+  'custom_list_aire': (BuildContext context) {
+    // Función para guardar datos
     void handleComentarioGuardado(String comentario, bool esPeligrosa) {
       print('Comentario guardado: $comentario, Es peligrosa: $esPeligrosa');
     }
 
     return ListaRegistrosAireScreen(
-      ciudad: {'nombre': 'Nueva York'},
+      ciudad: const {'nombre': 'Nueva York'},
       indiceContaminacion: 75,
       nivelContaminacion: 'Moderada',
       imagenUrl: 'assets/images/medium_aqi.png',
@@ -65,27 +66,30 @@ class _MyAppState extends State<MyApp> {
     );
   },
   'profile': (context) => ProfileScreen(onThemeChanged: _updateTheme),
-  'custom_list_item_aire': (BuildContext context) 
-  // funcion para guardar datos
-  {
+  'custom_list_item_aire': (BuildContext context) {
+    // Función para guardar datos
     void handleComentarioGuardado(String comentario, bool esPeligrosa) {
       print('Comentario guardado: $comentario, Es peligrosa: $esPeligrosa');
     }
+
     return VisualizacionRegistroAireScreen(
-      ciudad: {'nombre': 'Nueva York'},
+      ciudad: const {'nombre': 'Nueva York'},
       indiceContaminacion: 75,
       nivelContaminacion: 'Moderada',
       imagenUrl: 'assets/images/medium_aqi.png',
       onComentarioGuardado: handleComentarioGuardado,
     );
   },
-  'clima_ciudades': (context) =>  const ClimaCiudadesScreen(),
-  'formulario_screen': (context) =>  const AgregarCiudadScreen(),
+  'clima_ciudades': (context) => ClimaCiudadesScreen(),
+  'formulario_screen': (context) => const AgregarCiudadScreen(),
+  'buscar_clima': (context) => const BuscarClimaScreen(),
+  'nuestro_objetivo': (context) => NuestroObjetivoScreen(),
 },
     );
   }
 
   void _updateTheme() {
-    setState(() {}); // Actualiza la interfaz al cambiar el tema.
+    setState(() {}); 
   }
+
 }
