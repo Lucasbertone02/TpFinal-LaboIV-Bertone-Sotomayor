@@ -196,6 +196,7 @@ SizedBox(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
                       color: isDarkMode ? Colors.white : Colors.black87,
+
                     ),
                   ),
                 ],
@@ -356,6 +357,7 @@ SizedBox(
                       style: TextStyle(
                         fontSize: 16,
                         color: isDarkMode ? Colors.white : Colors.black87,
+                        
                         fontWeight: FontWeight.w500,
                       ),
                     ),

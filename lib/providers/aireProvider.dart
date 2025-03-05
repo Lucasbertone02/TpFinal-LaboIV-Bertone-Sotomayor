@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_application_base/models/aire_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_base/models/list_aire_model.dart';
 class AireProvider extends ChangeNotifier {
@@ -11,11 +12,15 @@ class AireProvider extends ChangeNotifier {
     for (var ciudad in ciudades) {
       final lat = ciudad['lat'];
       final lon = ciudad['lon'];
-
+  
       try {
+        final baseurl = dotenv.env['API_URL_ANDROID'];
+        if (baseurl == null) {
+        throw Exception("La variable URL no está definida en el archivo .env");
+       }
         // Se usa latitud y longitud para hacer la consulta
         final url = Uri.http(
-          '10.0.2.2:3000', 
+          baseurl, 
           '/api/v1/aire/polucion',
           {
             'lat': lat.toString(),
