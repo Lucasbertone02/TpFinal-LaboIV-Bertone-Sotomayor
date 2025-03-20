@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_base/screens/InformacionScreen.dart';
 import 'package:lottie/lottie.dart';
 
 class NuestroObjetivoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-     final bool isDarkMode = colorScheme.brightness == Brightness.dark;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isDarkMode = colorScheme.brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
@@ -27,7 +28,7 @@ class NuestroObjetivoScreen extends StatelessWidget {
           children: [
             SizedBox(height: 20),
             Lottie.asset(
-              'assets/lottie/animacion.json', 
+              'assets/lottie/animacionPlaneta.json',
               height: 200,
             ),
             SizedBox(height: 20),
@@ -50,21 +51,42 @@ class NuestroObjetivoScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    backgroundColor: Colors.blueAccent,
+                  ),
+                  child: Text("Volver", style: TextStyle(fontSize: 16, color: Colors.white)),
                 ),
-                backgroundColor: Colors.blueAccent,
-              ),
-              child: Text(
-                "Volver",
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => InformacionScreen()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: Colors.green,
+                    ),
+                    child: Text(
+                      "Ver más",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+              ],
             ),
           ],
         ),
@@ -72,3 +94,5 @@ class NuestroObjetivoScreen extends StatelessWidget {
     );
   }
 }
+
+
