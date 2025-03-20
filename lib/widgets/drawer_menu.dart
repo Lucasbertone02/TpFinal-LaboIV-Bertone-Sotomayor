@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class DrawerMenu extends StatelessWidget {
   final List<Map<String, String>> _menuItems = <Map<String, String>>[
   {'route': 'home', 'title': 'Home', 'subtitle': 'By Bertone-Sotomayor'},
-  {'route': 'profile', 'title': 'Perfil usuario', 'subtitle': 'By Bertone-Sotomayor'},
-  {'route': 'custom_list_aire', 'title': 'Lista Contaminacion Aire', 'subtitle': 'By Sotomayor'},
-  {'route': 'clima_ciudades', 'title': 'Clima Ciudades', 'subtitle': 'By Bertone'},
-  {'route': 'formulario_screen', 'title': 'Formulario Ciudades', 'subtitle': 'By Bertone'}, 
   {'route': 'buscar_clima', 'title': 'Buscar Clima', 'subtitle': 'By Bertone-Sotomayor'},
+  {'route': 'custom_list_aire', 'title': 'Lista de Contaminacion en Ciudades', 'subtitle': 'By Sotomayor'},
+  {'route': 'clima_ciudades', 'title': 'Lista de Clima en Ciudades', 'subtitle': 'By Bertone'},
+  {'route': 'formulario_screen', 'title': 'Formulario de Ciudades', 'subtitle': 'By Bertone'}, 
   {'route': 'nuestro_objetivo', 'title': 'Nuestro Objetivo', 'subtitle': 'By Sotomayor'},
+  {'route': 'profile', 'title': 'Ajustes de Pantalla', 'subtitle': 'By Bertone-Sotomayor'},
 ];
 
   DrawerMenu({super.key});
@@ -68,8 +68,7 @@ class _DrawerHeaderWithImage extends StatelessWidget {
           '[  Menu  ]',
           style: TextStyle(
             fontSize: 20,
-            color: Colors.white,
-            fontFamily: 'RobotoMono',
+            color: Color.fromARGB(255, 0, 0, 0),
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.right,
