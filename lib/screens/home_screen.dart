@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
      final ColorScheme colorScheme = Theme.of(context).colorScheme;
      final bool isDarkMode = colorScheme.brightness == Brightness.dark;
      return Scaffold(
-      backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
         title: Text(
           'App Clima',
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: isDarkMode ? Color.fromARGB(255, 60, 60, 100) : Colors.blue,
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       drawer: DrawerMenu(),
       body: RefreshIndicator(
@@ -225,7 +225,7 @@ SizedBox(
                 }
 
                 if (snapshot.hasError) {
-                  return Center(child: Text('Error al cargar los datos.'));
+                  return const Center(child: Text('Error al cargar los datos.'));
                 }
 
                 final datosCiudades = snapshot.data ?? {};
@@ -346,7 +346,7 @@ SizedBox(
               // Footer
               Container(
                 padding: const EdgeInsets.all(16.0),
-                color: isDarkMode ? Color.fromARGB(255, 60, 60, 100) : Colors.blue,
+                color: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

@@ -7,8 +7,10 @@ class NuestroObjetivoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final bool isDarkMode = colorScheme.brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
+      // Ajusta el color de fondo según el modo de la app
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
         title: Text(
           'Nuestro Objetivo',
@@ -19,19 +21,19 @@ class NuestroObjetivoScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: isDarkMode ? Color.fromARGB(255, 60, 60, 100) : Colors.blue,
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Lottie.asset(
               'assets/lottie/animacionPlaneta.json',
               height: 200,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               "Conciencia sobre el Clima y la Contaminación",
               textAlign: TextAlign.center,
@@ -41,7 +43,8 @@ class NuestroObjetivoScreen extends StatelessWidget {
                 color: isDarkMode ? Colors.white : Colors.black87,
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
+            // Descripción sobre la finalidad de la aplicación
             Text(
               "Nuestra aplicación te permite conocer el clima y la calidad del aire en ciudades de todo el mundo. Queremos generar conciencia sobre los niveles de contaminación y su impacto en el planeta.",
               textAlign: TextAlign.center,
@@ -50,7 +53,8 @@ class NuestroObjetivoScreen extends StatelessWidget {
                 color: isDarkMode ? Colors.white : Colors.black87,
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
+            // Botones para navegar a otras pantallas
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -59,33 +63,33 @@ class NuestroObjetivoScreen extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     backgroundColor: Colors.blueAccent,
                   ),
-                  child: Text("Volver", style: TextStyle(fontSize: 16, color: Colors.white)),
+                  child: const Text("Volver", style: TextStyle(fontSize: 16, color: Colors.white)),
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => InformacionScreen()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      backgroundColor: Colors.green,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => InformacionScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Text(
-                      "Ver más",
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
+                    backgroundColor: Colors.green,
                   ),
+                  child: const Text(
+                    "Ver más",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
               ],
             ),
           ],
@@ -94,5 +98,3 @@ class NuestroObjetivoScreen extends StatelessWidget {
     );
   }
 }
-
-

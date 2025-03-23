@@ -109,10 +109,10 @@ class ListaRegistrosAireScreen extends StatelessWidget {
      final ColorScheme colorScheme = Theme.of(context).colorScheme;
      final bool isDarkMode = colorScheme.brightness == Brightness.dark;
      return Scaffold(
-      backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
         title: Text(
-          'Lista de Registros de Contaminación',
+          'Lista de Contaminación del Aire',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 19,
@@ -120,18 +120,18 @@ class ListaRegistrosAireScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: isDarkMode ? Color.fromARGB(255, 60, 60, 100) : Colors.blue,
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       // carga los datos de contaminación de las ciudades
       body: FutureBuilder<Map<String, int>>(
         future: aireProvider.cargarDatosCiudades(ciudades),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error al cargar los datos'));
+            return const Center(child: Text('Error al cargar los datos'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No hay datos disponibles'));
+            return const Center(child: Text('No hay datos disponibles'));
           } else {
             final datosCiudades = snapshot.data!;
 

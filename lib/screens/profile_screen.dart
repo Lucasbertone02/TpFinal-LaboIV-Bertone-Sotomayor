@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
      final ColorScheme colorScheme = Theme.of(context).colorScheme;
      final bool isDarkMode = colorScheme.brightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
         title: Text(
           'Profile Screen',
@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: isDarkMode ? Color.fromARGB(255, 60, 60, 100) : Colors.blue,
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Column(

@@ -46,14 +46,22 @@ class _BuscarClimaScreenState extends State<BuscarClimaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isDarkMode = colorScheme.brightness == Brightness.dark;
     
     return Scaffold(
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
-        title: const Text('Buscar Clima'),
+        title: Text(
+          'Buscar Clima',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
         centerTitle: true,
-        backgroundColor: isDarkMode ? Colors.black87 : const Color.fromARGB(255, 95, 182, 233),
-        elevation: 4,
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Column(

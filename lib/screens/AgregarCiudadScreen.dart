@@ -32,7 +32,7 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
             "Pronto evaluaremos agregar la ciudad ${_ciudadController.text} "
             "${_esImportante ? 'como importante' : ''}.",
           ),
-          duration: Duration(seconds: 3),
+          duration: const Duration(seconds: 3),
         ),
       );
     }
@@ -44,7 +44,7 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
     final bool isDarkMode = colorScheme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
         title: Text(
           'Agregar Ciudad',
@@ -55,7 +55,7 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: isDarkMode ? Color.fromARGB(255, 60, 60, 100) : Colors.blue,
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -68,7 +68,7 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
                 // Campo para el nombre
                 TextFormField(
                   controller: _nombreController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Nombre",
                     border: OutlineInputBorder(),
                   ),
@@ -84,7 +84,7 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
                 // Campo para el apellido
                 TextFormField(
                   controller: _apellidoController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Apellido",
                     border: OutlineInputBorder(),
                   ),
@@ -100,7 +100,7 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
                 // Campo para ingresar el nombre de la ciudad
                 TextFormField(
                   controller: _ciudadController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Nombre de la Ciudad",
                     border: OutlineInputBorder(),
                   ),
@@ -117,7 +117,7 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
                 TextFormField(
                   controller: _justificacionController,
                   maxLines: 4,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "¿Por qué debemos agregar esta ciudad?",
                     border: OutlineInputBorder(),
                   ),
@@ -160,7 +160,7 @@ class _AgregarCiudadScreenState extends State<AgregarCiudadScreen> {
                     child: Text("Enviar"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: isDarkMode ? Colors.deepPurple : Colors.blueAccent,
-                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                     ),
                   ),
                 ),

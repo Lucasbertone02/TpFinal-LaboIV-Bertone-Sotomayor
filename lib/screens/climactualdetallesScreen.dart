@@ -43,7 +43,7 @@ class ClimaDetailsScreen extends StatelessWidget {
         elevation: 10,
       ),
       body: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -64,7 +64,7 @@ class ClimaDetailsScreen extends StatelessWidget {
                 Center(
                   child: AnimatedOpacity(
                     opacity: 1.0,
-                    duration: Duration(seconds: 1),
+                    duration: const Duration(seconds: 1),
                     child: Icon(
                       getWeatherIcon(icono),
                       size: 120,
