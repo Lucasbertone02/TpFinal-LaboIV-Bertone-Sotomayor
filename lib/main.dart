@@ -83,6 +83,7 @@ routes: {
   'clima_ciudades': (context) => ClimaCiudadesScreen(),
   'formulario_screen': (context) => const AgregarCiudadScreen(),
   'buscar_clima': (context) => const BuscarClimaScreen(),
+  'tutorial': (context) => NuestraAplicacionScreen(),
 },
     );
   }

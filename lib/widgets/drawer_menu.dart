@@ -6,8 +6,9 @@ class DrawerMenu extends StatelessWidget {
   {'route': 'profile', 'title': 'Perfil usuario', 'subtitle': 'By Bertone-Sotomayor'},
   {'route': 'custom_list_aire', 'title': 'Lista Contaminacion Aire', 'subtitle': 'By Sotomayor'},
   {'route': 'clima_ciudades', 'title': 'Clima Ciudades', 'subtitle': 'By Bertone'},
-  {'route': 'formulario_screen', 'title': 'Formulario Ciudades', 'subtitle': 'By Bertone'}, 
+  {'route': 'formulario_screen', 'title': 'Formulario Ciudades', 'subtitle': 'By Bertone'},
   {'route': 'buscar_clima', 'title': 'Buscar Clima', 'subtitle': 'By Bertone-Sotomayor'},
+  {'route': 'tutorial', 'title': 'Tutorial', 'subtitle': 'By Bertone'}
 ];
 
   DrawerMenu({super.key});
