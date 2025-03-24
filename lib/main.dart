@@ -84,7 +84,7 @@ routes: {
   'formulario_screen': (context) => const AgregarCiudadScreen(),
   'buscar_clima': (context) => const BuscarClimaScreen(),
   'nuestro_objetivo': (context) => NuestroObjetivoScreen(),
-
+  'tutorial': (context) => NuestraAplicacionScreen(),
 },
 );
 }
