@@ -34,21 +34,21 @@ class _HomeScreenState extends State<HomeScreen> {
       {'nombre': 'Tokyo', 'lat': 35.6895, 'lon': 139.6917},
     ];
 
-    return Scaffold(
+     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+     final bool isDarkMode = colorScheme.brightness == Brightness.dark;
+     return Scaffold(
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
-        title: const Text.rich(
-          TextSpan(
-            text: 'App Clima',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-              color: Colors.white,
-            ),
+        title: Text(
+          'App Clima',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+            color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
-        elevation: 20,
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 95, 182, 233),
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       drawer: DrawerMenu(),
       body: RefreshIndicator(
@@ -83,9 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : Theme.of(context).textTheme.bodyLarge?.color,
+                    color: isDarkMode ? Colors.white : Colors.black87,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -171,9 +169,7 @@ SizedBox(
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black87,
                     ),
                   ),
                   const SizedBox(height: 8), // Correcto
@@ -190,9 +186,7 @@ SizedBox(
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black87,
                     ),
                   ),
                   const SizedBox(height: 8), // Correcto
@@ -201,9 +195,8 @@ SizedBox(
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black87,
+                      color: isDarkMode ? Colors.white : Colors.black87,
+
                     ),
                   ),
                 ],
@@ -232,7 +225,7 @@ SizedBox(
                 }
 
                 if (snapshot.hasError) {
-                  return Center(child: Text('Error al cargar los datos.'));
+                  return const Center(child: Text('Error al cargar los datos.'));
                 }
 
                 final datosCiudades = snapshot.data ?? {};
@@ -293,9 +286,7 @@ SizedBox(
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Theme.of(context).brightness == Brightness.dark
-                                    ? Colors.white
-                                    : Colors.black,
+                                color: isDarkMode ? Colors.white : Colors.black87,
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -311,9 +302,7 @@ SizedBox(
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
-                                color: Theme.of(context).brightness == Brightness.dark
-                                    ? Colors.white
-                                    : Colors.black,
+                                color: isDarkMode ? Colors.white : Colors.black87,
                               ),
                             ),
                           ],
@@ -347,7 +336,7 @@ SizedBox(
                   '¡Por cualquier cosa no dudes en consultarnos! Te contestaremos lo antes posible por nuestro Mail, climas@gmail.com',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.black87,
+                    color:  Colors.black87,
                     fontWeight: FontWeight.w500,
                   ),
                   textAlign: TextAlign.center,
@@ -357,17 +346,18 @@ SizedBox(
               // Footer
               Container(
                 padding: const EdgeInsets.all(16.0),
-                color: const Color.fromARGB(255, 95, 182, 233),
+                color: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
                 width: double.infinity,
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       '¡Gracias por usar nuestra aplicación!',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.white,
+                        color: isDarkMode ? Colors.white : Colors.black87,
+                        
                         fontWeight: FontWeight.w500,
                       ),
                     ),

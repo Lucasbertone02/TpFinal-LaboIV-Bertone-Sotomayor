@@ -13,7 +13,7 @@ class ClimaCiudadesScreen extends StatelessWidget {
     final bool isDarkMode = colorScheme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
         title: Text(
           'Clima por Ciudad',
@@ -24,12 +24,12 @@ class ClimaCiudadesScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: isDarkMode ? Color.fromARGB(255, 60, 60, 100) : Colors.blue,
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       body: Consumer<Climaciudadesprovider>(
         builder: (context, climaProvider, child) {
           if (climaProvider.climas == null || climaProvider.climas!.isEmpty) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           return Padding(
@@ -161,7 +161,7 @@ class ClimaCiudadesScreen extends StatelessWidget {
         width: 160,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isDarkMode ? Color.fromARGB(255, 50, 50, 80) : Colors.white,
+          color: isDarkMode ? const Color.fromARGB(255, 50, 50, 80) : Colors.white,
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(

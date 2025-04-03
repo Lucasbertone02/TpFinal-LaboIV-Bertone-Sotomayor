@@ -106,32 +106,32 @@ class ListaRegistrosAireScreen extends StatelessWidget {
     // obtiene el provider que maneja los datos de contaminación del aire
     final aireProvider = Provider.of<AireProvider>(context);
 
-    return Scaffold(
+     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+     final bool isDarkMode = colorScheme.brightness == Brightness.dark;
+     return Scaffold(
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
-        title: const Text.rich(
-          TextSpan(
-            text: 'Lista de registros de contaminación',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.white,
-            ),
+        title: Text(
+          'Lista de Contaminación del Aire',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 19,
+            color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
-        elevation: 20,
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 95, 182, 233),
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       // carga los datos de contaminación de las ciudades
       body: FutureBuilder<Map<String, int>>(
         future: aireProvider.cargarDatosCiudades(ciudades),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error al cargar los datos'));
+            return const Center(child: Text('Error al cargar los datos'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No hay datos disponibles'));
+            return const Center(child: Text('No hay datos disponibles'));
           } else {
             final datosCiudades = snapshot.data!;
 
