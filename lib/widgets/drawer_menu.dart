@@ -9,6 +9,7 @@ class DrawerMenu extends StatelessWidget {
   {'route': 'formulario_screen', 'title': 'Formulario de Ciudades', 'subtitle': 'By Bertone'}, 
   {'route': 'nuestro_objetivo', 'title': 'Nuestro Objetivo', 'subtitle': 'By Sotomayor'},
   {'route': 'profile', 'title': 'Ajustes de Pantalla', 'subtitle': 'By Bertone-Sotomayor'},
+  {'route': 'login', 'title': 'Administracion', 'subtitle': 'By Bertone-Sotomayor'},
 ];
 
   DrawerMenu({super.key});
