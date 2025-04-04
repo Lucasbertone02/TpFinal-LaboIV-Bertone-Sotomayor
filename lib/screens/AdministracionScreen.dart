@@ -63,7 +63,7 @@ class AdministracionScreenState extends State<AdministracionScreen> {
       final response = await http.put(
         Uri.http(baseurl, '/api/v1/clima/clima/favorito'),
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"nombre_ciudad": cityName}),
+        body: jsonEncode({"nombreCiudad": cityName}),
       );
 
       if (response.statusCode == 200) {
@@ -87,7 +87,7 @@ class AdministracionScreenState extends State<AdministracionScreen> {
       final response = await http.delete(
         Uri.http(baseurl, '/api/v1/clima/climadelete'),
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"nombre_ciudad": cityName}),
+        body: jsonEncode({"nombreCiudad": cityName}),
       );
 
       if (response.statusCode == 200) {
@@ -697,12 +697,12 @@ class AdministracionScreenState extends State<AdministracionScreen> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _createCity({
-                    "nombre_ciudad": nombreController.text,
+                    "nombreCiudad": nombreController.text,
                     "descripcion": descripcionController.text,
                     "temperatura": double.tryParse(temperaturaController.text) ?? 0.0,
-                    "temp_minima": double.tryParse(tempMinimaController.text) ?? 0.0,
-                    "temp_maxima": double.tryParse(tempMaximaController.text) ?? 0.0,
-                    "sensacion_termica": double.tryParse(sensacionTermicaController.text) ?? 0.0,
+                    "tempMinima": double.tryParse(tempMinimaController.text) ?? 0.0,
+                    "tempMaxima": double.tryParse(tempMaximaController.text) ?? 0.0,
+                    "sensacionTermica": double.tryParse(sensacionTermicaController.text) ?? 0.0,
                     "humedad": int.tryParse(humedadController.text) ?? 0,
                     "viento": double.tryParse(vientoController.text) ?? 0.0,
                   });
