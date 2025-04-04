@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_passwordController.text == _adminPassword) {
       Navigator.push(
         context,
-         MaterialPageRoute(builder: (context) => const Administracionscreen()),
+         MaterialPageRoute(builder: (context) => const AdministracionScreen()),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

@@ -94,5 +94,4 @@ routes: {
   void _updateTheme() {
     setState(() {}); 
   }
-
 }
