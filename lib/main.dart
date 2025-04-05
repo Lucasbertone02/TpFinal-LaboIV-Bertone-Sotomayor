@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
 import 'package:flutter_application_base/providers/aireProvider.dart';
 import 'package:flutter_application_base/providers/climaciudadesProvider.dart';
+import 'package:flutter_application_base/screens/NuestraAplicacionScreen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_application_base/screens/screens.dart';
 import 'package:provider/provider.dart';
@@ -83,8 +84,9 @@ routes: {
   'clima_ciudades': (context) => ClimaCiudadesScreen(),
   'formulario_screen': (context) => const AgregarCiudadScreen(),
   'buscar_clima': (context) => const BuscarClimaScreen(),
-  'nuestro_objetivo': (context) => NuestroObjetivoScreen(),
   'tutorial': (context) => NuestraAplicacionScreen(),
+  'nuestro_objetivo': (context) => NuestroObjetivoScreen(),
+  'login': (context) =>  LoginScreen()
 },
 );
 }
@@ -92,5 +94,4 @@ routes: {
   void _updateTheme() {
     setState(() {}); 
   }
-
 }

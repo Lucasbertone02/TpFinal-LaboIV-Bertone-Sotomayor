@@ -7,3 +7,4 @@ export 'package:flutter_application_base/screens/climaCiudadesScreen.dart';
 export 'package:flutter_application_base/screens/buscarClimaScreen.dart';
 export 'package:flutter_application_base/screens/NuestroObjetivo.dart';
 export 'package:flutter_application_base/screens/NuestraAplicacionScreen.dart';
+export 'package:flutter_application_base/screens/LoginScreen.dart';
