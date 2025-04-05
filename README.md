@@ -61,6 +61,27 @@ Las secciones del tutorial incluyen:
 
 ---
 
+### 5. Acceso Administrador (Bertone - Sotomayor)
+Esta pantalla está pensada exclusivamente para el uso del administrador del sistema. Su función principal es restringir el acceso a la sección de administración mediante una contraseña.
+
+- Se solicita una **contraseña secreta** para ingresar al panel de administración.
+- Si la contraseña ingresada es correcta, el usuario es redirigido a la pantalla de **Administración**.
+- En caso de ser incorrecta, se muestra un **mensaje de error** mediante un SnackBar, y luego de unos segundos, se redirige automáticamente a la pantalla principal.
+
+---
+
+### 6. Pantalla AdministracionScreen 
+
+La pantalla `AdministracionScreen` permite a los administradores realizar tareas de mantenimiento sobre la base de datos del clima de ciudades.
+
+* **Agregar ciudad**: muestra un formulario con campos para ingresar los datos necesarios y se conecta con la API (`/climapost`) para insertar la nueva ciudad.
+* **Marcar como favorita**: solicita el nombre de la ciudad y realiza una petición a la API (`/clima/favorito`) para alternar su estado de favorito.
+* **Eliminar ciudad**: permite eliminar una ciudad de la base de datos ingresando su nombre y enviando una solicitud DELETE a (`/climadelete`).
+* Todas las acciones actualizan automáticamente la lista de ciudades mostradas.
+* Se utiliza `SnackBar` para notificar al usuario sobre el éxito o error de cada operación.
+
+---
+
 ## Mejoras y Optimización del Proyecto
 Las mejoras realizadas no solo expandieron el contenido del proyecto original, sino que también lo hicieron más robusto y accesible. Algunas de las optimizaciones más importantes incluyen:
 
@@ -74,10 +95,6 @@ Las mejoras realizadas no solo expandieron el contenido del proyecto original, s
 
 ## Conclusión PPS
 Con estas mejoras, logramos que la aplicación no solo sea una herramienta útil para conocer el clima y la contaminación, sino también una plataforma educativa que fomenta la conciencia ambiental. 
-
-## Integrantes
-- **Bertone Lucas**
-- **Ignacio Sotomayor**
 
 ## Descripción del Proyecto
 Este proyecto vincula una **API en Node.js** con una aplicación desarrollada en **Dart y Flutter**. La aplicación consume los endpoints del backend y muestra los datos en el frontend, permitiendo obtener información en tiempo real sobre el clima y la calidad del aire en distintas ciudades.
