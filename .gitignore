@@ -30,8 +30,7 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-# /build/ ← ❌ Esta línea fue comentada para permitir subir build/web
-# ⚠️ Esto es necesario si vas a desplegar el frontend web
+/build/
 
 # Symbolication related
 app.*.symbols
