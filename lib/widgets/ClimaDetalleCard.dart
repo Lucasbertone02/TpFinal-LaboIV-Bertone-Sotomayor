@@ -26,7 +26,7 @@ class ClimaDetalleCard extends StatelessWidget {
             fontSize: 30,
             fontWeight: FontWeight.bold,
             color: isDarkMode ? Colors.white : Colors.black,
-            shadows: [
+            shadows: const [
               Shadow(
                 blurRadius: 10.0,
                 color: Colors.black38,
@@ -47,7 +47,7 @@ class ClimaDetalleCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: isDarkMode ? Colors.grey[850] : Colors.blueGrey[50],
             borderRadius: BorderRadius.circular(15),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black26,
                 blurRadius: 10,
@@ -72,7 +72,7 @@ class ClimaDetalleCard extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: isDarkMode ? Colors.orangeAccent : Colors.red,
           ),
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           child: Text(
             'Temperatura: $temperature',
           ),

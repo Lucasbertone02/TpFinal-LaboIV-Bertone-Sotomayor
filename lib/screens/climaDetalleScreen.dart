@@ -18,7 +18,7 @@ class ClimaDetalleScreen extends StatelessWidget {
     final bool isDarkMode = colorScheme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? Color.fromARGB(255, 30, 30, 50) : Colors.white,
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
         title: Text('Detalles del Clima en ${datoClima.nombreCiudad}'), // Mostrar el nombre de la ciudad
         centerTitle: true,
@@ -67,12 +67,12 @@ class ClimaDetalleScreen extends StatelessWidget {
   // Widget para mostrar la fila de información de viento y humedad
   Widget _buildInfoRow(String label, String value, bool isDarkMode) {
     return Container(
-      padding: EdgeInsets.all(18),
+      padding: const EdgeInsets.all(18),
       margin: const EdgeInsets.symmetric(vertical: 12),
       decoration: BoxDecoration(
         color: isDarkMode ? Colors.grey[850] : Colors.blueGrey[50],
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 15,

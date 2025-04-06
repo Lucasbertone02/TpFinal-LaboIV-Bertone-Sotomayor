@@ -32,22 +32,20 @@ class _VisualizacionRegistroScreenState
     final indiceContaminacion = widget.indiceContaminacion;
     final nivelContaminacion = widget.nivelContaminacion;
     final imagenUrl = widget.imagenUrl;
-
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final bool isDarkMode = colorScheme.brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
-        title: const Text.rich(
-          TextSpan(
-            text: 'Detalles por ciudad', 
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-              color: Colors.white,
-            ),
+        title: Text(
+          'Detalles por Ciudad',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+            color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
-        elevation: 20, 
-        centerTitle: true, 
-        backgroundColor: const Color.fromARGB(255, 95, 182, 233), 
+        centerTitle: true,
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0), 

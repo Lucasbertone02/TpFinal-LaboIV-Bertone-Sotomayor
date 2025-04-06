@@ -26,24 +26,24 @@ class ClimaDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-
-    return Scaffold(
+   final ColorScheme colorScheme = Theme.of(context).colorScheme;
+     final bool isDarkMode = colorScheme.brightness == Brightness.dark;
+     return Scaffold(
+      backgroundColor: isDarkMode ? const Color.fromARGB(255, 30, 30, 50) : Colors.white,
       appBar: AppBar(
         title: Text(
           'Detalles de $nombreCiudad',
           style: TextStyle(
-            color: isDarkMode ? Colors.white : Colors.black87,
             fontWeight: FontWeight.bold,
-            fontSize: 24,
+            fontSize: 25,
+            color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
         centerTitle: true,
-        backgroundColor: isDarkMode ? Colors.black : const Color.fromARGB(255, 95, 182, 233),
-        elevation: 10,
+        backgroundColor: isDarkMode ? const Color.fromARGB(255, 60, 60, 100) : Colors.blue,
       ),
       body: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -64,7 +64,7 @@ class ClimaDetailsScreen extends StatelessWidget {
                 Center(
                   child: AnimatedOpacity(
                     opacity: 1.0,
-                    duration: Duration(seconds: 1),
+                    duration: const Duration(seconds: 1),
                     child: Icon(
                       getWeatherIcon(icono),
                       size: 120,
