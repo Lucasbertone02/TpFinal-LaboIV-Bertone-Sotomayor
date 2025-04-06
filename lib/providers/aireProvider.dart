@@ -14,7 +14,7 @@ class AireProvider extends ChangeNotifier {
       final lon = ciudad['lon'];
   
       try {
-        final baseurl = dotenv.env['API_URL_CHROME'];
+        final baseurl = dotenv.env['API_URL_ANDROID'];
         if (baseurl == null) {
         throw Exception("La variable URL no está definida en el archivo .env");
        }
