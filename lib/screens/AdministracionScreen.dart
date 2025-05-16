@@ -13,6 +13,14 @@ class AdministracionScreen extends StatefulWidget {
 class AdministracionScreenState extends State<AdministracionScreen> {
   List<dynamic> _cities = [];
   final String baseurl = dotenv.env['API_URL_ANDROID'] ?? '127.0.0.1:3000';
+  // obtenemos la API key del archivo .env para los headers
+  final String apiKey = dotenv.env['API_KEY'] ?? '';
+
+  // headers comunes para todas las peticiones HTTP
+  Map<String, String> get _headers => {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer $apiKey" 
+  };
 
   @override
   void initState() {
@@ -22,7 +30,10 @@ class AdministracionScreenState extends State<AdministracionScreen> {
 
   Future<void> _fetchCities() async {
     try {
-      final response = await http.get(Uri.http(baseurl, '/api/v1/clima/climaget'));
+      final response = await http.get(
+        Uri.http(baseurl, '/api/v1/clima/climaget'),
+        headers: _headers, // Usar los headers con la API key
+      );
       if (response.statusCode == 200) {
         setState(() {
           _cities = json.decode(response.body);
@@ -39,7 +50,7 @@ class AdministracionScreenState extends State<AdministracionScreen> {
     try {
       final response = await http.post(
         Uri.http(baseurl, '/api/v1/clima/climapost'),
-        headers: {"Content-Type": "application/json"},
+        headers: _headers, // usa los headers con la API key
         body: json.encode(cityData),
       );
       if (response.statusCode == 201) {
@@ -62,7 +73,7 @@ class AdministracionScreenState extends State<AdministracionScreen> {
     try {
       final response = await http.put(
         Uri.http(baseurl, '/api/v1/clima/clima/favorito'),
-        headers: {"Content-Type": "application/json"},
+        headers: _headers, // usa los headers con la API key
         body: jsonEncode({"nombreCiudad": cityName}),
       );
 
@@ -86,7 +97,7 @@ class AdministracionScreenState extends State<AdministracionScreen> {
     try {
       final response = await http.delete(
         Uri.http(baseurl, '/api/v1/clima/climadelete'),
-        headers: {"Content-Type": "application/json"},
+        headers: _headers, // usa los headers con la API key
         body: jsonEncode({"nombreCiudad": cityName}),
       );
 
@@ -125,6 +136,7 @@ class AdministracionScreenState extends State<AdministracionScreen> {
     );
   }
 
+  
   void _showCityInputDialog(String title, Function(String) onConfirm) {
     final TextEditingController cityController = TextEditingController();
     final formKey = GlobalKey<FormState>();
