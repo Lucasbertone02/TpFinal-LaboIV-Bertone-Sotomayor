@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_base/screens/AdministracionScreen.dart';
+import 'package:flutter_application_base/screens/AdminSelector.dart';
 import 'package:flutter_application_base/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_passwordController.text == _adminPassword) {
       Navigator.push(
         context,
-         MaterialPageRoute(builder: (context) => const AdministracionScreen()),
+         MaterialPageRoute(builder: (context) => const AdminSelectorScreen()),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
